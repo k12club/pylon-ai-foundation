@@ -1,0 +1,197 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Material Request Demo API",
+    "version": "1.0.0",
+    "description": "Practice API for the material request demo. All data is fictitious and kept in memory. See requirements.md (REQ-01 to REQ-17) for the business rules."
+  },
+  "servers": [{ "url": "http://127.0.0.1:3100" }],
+  "security": [{ "bearerAuth": [] }],
+  "paths": {
+    "/api/login": {
+      "post": {
+        "summary": "Log in and receive a bearer token (REQ-01)",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LoginInput" } } }
+        },
+        "responses": {
+          "200": { "description": "Logged in", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LoginResult" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/api/materials": {
+      "get": {
+        "summary": "List materials",
+        "responses": {
+          "200": { "description": "Materials", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Material" } } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/api/sites": {
+      "get": {
+        "summary": "List construction sites",
+        "responses": {
+          "200": { "description": "Sites", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Site" } } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/api/requests": {
+      "get": {
+        "summary": "List requests, newest id first (REQ-10 to REQ-13)",
+        "parameters": [
+          { "name": "status", "in": "query", "schema": { "type": "string", "enum": ["pending", "approved", "rejected"] } },
+          { "name": "site", "in": "query", "schema": { "type": "string", "example": "SITE-A" } },
+          { "name": "from", "in": "query", "description": "Need date from, inclusive (YYYY-MM-DD)", "schema": { "type": "string", "format": "date" } },
+          { "name": "to", "in": "query", "description": "Need date to, inclusive (YYYY-MM-DD)", "schema": { "type": "string", "format": "date" } },
+          { "name": "q", "in": "query", "description": "Partial text in material name, material code or note; case-insensitive; Thai and English", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Requests", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Request" } } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      },
+      "post": {
+        "summary": "Create a request, requester role only (REQ-03 to REQ-09)",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RequestInput" } } }
+        },
+        "responses": {
+          "201": { "description": "Created with status pending", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Request" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/api/requests/{id}": {
+      "get": {
+        "summary": "Get one request",
+        "parameters": [{ "$ref": "#/components/parameters/RequestId" }],
+        "responses": {
+          "200": { "description": "Request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Request" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/api/requests/{id}/approve": {
+      "post": {
+        "summary": "Approve a pending request, approver role only (REQ-15, REQ-16)",
+        "parameters": [{ "$ref": "#/components/parameters/RequestId" }],
+        "responses": {
+          "200": { "description": "Approved", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Request" } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/api/requests/{id}/reject": {
+      "post": {
+        "summary": "Reject a pending request with a reason, approver role only (REQ-15, REQ-16)",
+        "parameters": [{ "$ref": "#/components/parameters/RequestId" }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "required": ["reason"], "properties": { "reason": { "type": "string", "minLength": 1, "maxLength": 200 } } } } }
+        },
+        "responses": {
+          "200": { "description": "Rejected", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Request" } } } },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "409": { "$ref": "#/components/responses/Conflict" }
+        }
+      }
+    },
+    "/api/reset": {
+      "post": {
+        "summary": "Restore the seed data and restart numbering at MR-0009 for the next request (REQ-17)",
+        "responses": {
+          "200": { "description": "Reset done", "content": { "application/json": { "schema": { "type": "object", "properties": { "ok": { "type": "boolean" }, "count": { "type": "integer" } } } } } },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": { "type": "http", "scheme": "bearer" }
+    },
+    "parameters": {
+      "RequestId": { "name": "id", "in": "path", "required": true, "schema": { "type": "string", "pattern": "^MR-\\d{4}$", "example": "MR-0001" } }
+    },
+    "responses": {
+      "BadRequest": { "description": "Invalid input (REQ-05 to REQ-07, REQ-15)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+      "Unauthorized": { "description": "Missing or invalid token, or wrong credentials (REQ-01, REQ-02)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+      "Forbidden": { "description": "Role not allowed (REQ-03, REQ-15)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+      "NotFound": { "description": "Request not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+      "Conflict": { "description": "Duplicate pending request or request already decided (REQ-09, REQ-16)", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+    },
+    "schemas": {
+      "Error": { "type": "object", "properties": { "error": { "type": "string" } } },
+      "LoginInput": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": { "username": { "type": "string", "example": "requester1" }, "password": { "type": "string" } }
+      },
+      "LoginResult": {
+        "type": "object",
+        "properties": {
+          "token": { "type": "string" },
+          "username": { "type": "string" },
+          "role": { "type": "string", "enum": ["requester", "approver"] },
+          "displayName": { "type": "string" }
+        }
+      },
+      "Material": {
+        "type": "object",
+        "properties": { "code": { "type": "string" }, "name": { "type": "string" }, "unit": { "type": "string" }, "unitPrice": { "type": "number" } }
+      },
+      "Site": { "type": "object", "properties": { "code": { "type": "string" }, "name": { "type": "string" } } },
+      "RequestInput": {
+        "type": "object",
+        "required": ["itemCode", "qty", "site", "needDate"],
+        "properties": {
+          "itemCode": { "type": "string", "example": "MAT-003" },
+          "qty": { "type": "integer", "minimum": 1, "maximum": 500, "example": 2 },
+          "site": { "type": "string", "example": "SITE-B" },
+          "needDate": { "type": "string", "format": "date", "example": "2027-01-20" },
+          "note": { "type": "string", "maxLength": 200, "description": "Optional; at most 200 characters, Thai or English" }
+        }
+      },
+      "Request": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "example": "MR-0009" },
+          "requester": { "type": "string" },
+          "itemCode": { "type": "string" },
+          "itemName": { "type": "string" },
+          "unit": { "type": "string" },
+          "unitPrice": { "type": "number" },
+          "qty": { "type": "integer" },
+          "site": { "type": "string" },
+          "siteName": { "type": "string" },
+          "needDate": { "type": "string", "format": "date" },
+          "note": { "type": "string" },
+          "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+          "subtotal": { "type": "number", "description": "qty x unitPrice, baht" },
+          "vat": { "type": "number", "description": "7 percent of subtotal, rounded half up to 2 decimals, baht" },
+          "net": { "type": "number", "description": "subtotal + vat, baht" },
+          "decidedBy": { "type": "string", "nullable": true },
+          "rejectReason": { "type": "string", "nullable": true }
+        }
+      }
+    }
+  }
+}

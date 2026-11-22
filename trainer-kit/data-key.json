@@ -1,0 +1,203 @@
+{
+  "clean_rows": {
+    "site-a.csv": 40,
+    "site-b.csv": 44,
+    "site-c.xlsx": 36
+  },
+  "value_by_site": {
+    "SITE-A": {
+      "satang": 92090565,
+      "baht": "920,905.65"
+    },
+    "SITE-B": {
+      "satang": 84252340,
+      "baht": "842,523.40"
+    },
+    "SITE-C": {
+      "satang": 86184125,
+      "baht": "861,841.25"
+    }
+  },
+  "by_material": {
+    "MAT-002": {
+      "qty": 2003,
+      "value_satang": 37506175,
+      "value_baht": "375,061.75"
+    },
+    "MAT-001": {
+      "qty": 3160,
+      "value_satang": 45030000,
+      "value_baht": "450,300.00"
+    },
+    "MAT-004": {
+      "qty": 26271,
+      "value_satang": 57139425,
+      "value_baht": "571,394.25"
+    },
+    "MAT-005": {
+      "qty": 12108,
+      "value_satang": 71316120,
+      "value_baht": "713,161.20"
+    },
+    "MAT-006": {
+      "qty": 749,
+      "value_satang": 23593500,
+      "value_baht": "235,935.00"
+    },
+    "MAT-008": {
+      "qty": 166,
+      "value_satang": 7724810,
+      "value_baht": "77,248.10"
+    },
+    "MAT-003": {
+      "qty": 251,
+      "value_satang": 10542000,
+      "value_baht": "105,420.00"
+    },
+    "MAT-007": {
+      "qty": 75,
+      "value_satang": 9675000,
+      "value_baht": "96,750.00"
+    }
+  },
+  "value_by_date": {
+    "2027-01-13": {
+      "satang": 13953925,
+      "baht": "139,539.25"
+    },
+    "2027-01-14": {
+      "satang": 20766790,
+      "baht": "207,667.90"
+    },
+    "2027-01-15": {
+      "satang": 30690575,
+      "baht": "306,905.75"
+    },
+    "2027-01-16": {
+      "satang": 30014825,
+      "baht": "300,148.25"
+    },
+    "2027-01-17": {
+      "satang": 23281325,
+      "baht": "232,813.25"
+    },
+    "2027-01-18": {
+      "satang": 8581760,
+      "baht": "85,817.60"
+    },
+    "2027-01-19": {
+      "satang": 10723475,
+      "baht": "107,234.75"
+    },
+    "2027-01-20": {
+      "satang": 5138445,
+      "baht": "51,384.45"
+    },
+    "2027-01-21": {
+      "satang": 12675035,
+      "baht": "126,750.35"
+    },
+    "2027-01-22": {
+      "satang": 36722465,
+      "baht": "367,224.65"
+    },
+    "2027-01-23": {
+      "satang": 17792070,
+      "baht": "177,920.70"
+    },
+    "2027-01-24": {
+      "satang": 12325225,
+      "baht": "123,252.25"
+    },
+    "2027-01-25": {
+      "satang": 27298165,
+      "baht": "272,981.65"
+    },
+    "2027-01-26": {
+      "satang": 12562950,
+      "baht": "125,629.50"
+    }
+  },
+  "flaws": {
+    "site-a.csv": {
+      "blank": 2,
+      "dup": 2,
+      "date": 6,
+      "site_var": 5,
+      "comma": 3,
+      "text": 0,
+      "ton": 2
+    },
+    "site-b.csv": {
+      "blank": 3,
+      "dup": 2,
+      "date": 5,
+      "site_var": 4,
+      "comma": 3,
+      "text": 0,
+      "ton": 3
+    },
+    "site-c.xlsx": {
+      "blank": 2,
+      "dup": 1,
+      "date": 4,
+      "site_var": 4,
+      "comma": 2,
+      "text": 3,
+      "ton": 1
+    }
+  },
+  "naive": {
+    "duplicates_kept": "2,710,218.30",
+    "ton_read_as_bag": "2,479,065.30",
+    "both": "2,564,013.30",
+    "comma_rows_dropped": "2,391,066.30"
+  },
+  "letter_by_site": {
+    "SITE-A": {
+      "site_name": "โครงการอาคารสำนักงานริมน้ำ",
+      "period_from": "2027-01-13",
+      "period_to": "2027-01-26",
+      "delivery_count": 40,
+      "total_value": "920,905.65",
+      "top_material": "MAT-002 เหล็กเส้นข้ออ้อย DB12",
+      "top_material_value": "234,998.75"
+    },
+    "SITE-B": {
+      "site_name": "โครงการคลังสินค้าทุ่งทอง",
+      "period_from": "2027-01-13",
+      "period_to": "2027-01-26",
+      "delivery_count": 44,
+      "total_value": "842,523.40",
+      "top_material": "MAT-001 ปูนซีเมนต์ปอร์ตแลนด์",
+      "top_material_value": "202,350.00"
+    },
+    "SITE-C": {
+      "site_name": "โครงการหมู่บ้านสวนสัก",
+      "period_from": "2027-01-13",
+      "period_to": "2027-01-25",
+      "delivery_count": 36,
+      "total_value": "861,841.25",
+      "top_material": "MAT-005 กระเบื้องหลังคา",
+      "top_material_value": "309,166.10"
+    }
+  },
+  "grand_total": {
+    "satang": 262527030,
+    "baht": "2,625,270.30"
+  },
+  "session2": {
+    "by_branch": {
+      "สาขาเหนือ": 23760,
+      "สาขากลาง": 42090,
+      "สาขาใต้": 43940
+    },
+    "by_group": {
+      "ปูน": 9450,
+      "เหล็ก": 16600,
+      "อิฐ": 4440,
+      "สี": 79300
+    },
+    "total": 109790
+  }
+}

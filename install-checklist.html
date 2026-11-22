@@ -1,0 +1,385 @@
+<title>ติดตั้งก่อนเรียน Codex</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column work order, 46rem wide; numbered steps on a hairline list, each ends in a "what you should see" box with the tick */
+:root {
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --ink: #17202B;
+  --muted: #4F5B6B;
+  --line: #D5DBE3;
+  --accent: #2347B5;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E5EBFA;
+  --done: #14713F;
+  --done-soft: #E2F2E8;
+  --warn: #93400D;
+  --warn-soft: #FAEDE2;
+  --code-bg: #ECEFF4;
+  --font-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "Cascadia Mono", Consolas, ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+    --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+    --done: #63CF99; --done-soft: #143021; --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+  --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+  --done: #63CF99; --done-soft: #143021; --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 4rem;
+  display: grid;
+  gap: 2.25rem;
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.35; }
+h1 { font-size: 2rem; font-weight: 700; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible + span, .seg input:focus-visible + span {
+  outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px;
+}
+code, kbd { font-family: var(--font-mono); font-size: 0.92em; }
+:where(p, li) > code { background: var(--code-bg); border-radius: 4px; padding: 0 0.3em; }
+code.nw { white-space: nowrap; }
+kbd {
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 4px;
+  padding: 0 0.35em; white-space: nowrap;
+}
+
+/* header */
+.top { display: grid; gap: 1rem; }
+.eyebrow { color: var(--muted); font-size: 0.95rem; font-weight: 500; letter-spacing: 0.02em; }
+.lede { color: var(--muted); max-width: 40rem; }
+.seg-wrap { display: grid; gap: 0.5rem; }
+.seg-label { font-weight: 600; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.5rem; border: 0; padding: 0; margin: 0; }
+.seg label { cursor: pointer; }
+.seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.seg span {
+  display: inline-block; padding: 0.5rem 1.1rem; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  font-weight: 500;
+}
+.seg input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+.progress { display: grid; gap: 0.4rem; }
+.progress-text { font-weight: 600; font-variant-numeric: tabular-nums; }
+.bar { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--done); border-radius: 999px; transition: width .25s ease; }
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+
+/* rules */
+.rules { background: var(--warn-soft); border-radius: 12px; padding: 1.25rem 1.25rem 1.35rem; display: grid; gap: 0.75rem; }
+.rules h2 { color: var(--warn); }
+.rules ul { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.35rem; }
+
+/* powershell how-to */
+.howto { display: grid; gap: 0.75rem; }
+.howto ol { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.35rem; }
+
+/* steps */
+.steps-sec { display: grid; gap: 1rem; }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.step { counter-increment: step; position: relative; padding: 1.4rem 1.25rem 1.4rem 3.75rem; display: grid; gap: 0.75rem; border-top: 1px solid var(--line); min-width: 0; }
+.step:first-child { border-top: 0; }
+.step::before {
+  content: counter(step);
+  position: absolute; left: 1.1rem; top: 1.35rem;
+  width: 1.85rem; height: 1.85rem; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--accent-soft); color: var(--accent);
+  font-weight: 700; font-size: 0.95rem; font-variant-numeric: tabular-nums;
+}
+.step.is-done::before { content: "\2713"; background: var(--done); color: var(--surface); }
+.step-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.6rem; }
+.step-head h3 { margin-right: 0.25rem; }
+.chip { font-size: 0.875rem; font-weight: 500; padding: 0.05rem 0.6rem; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.chip.req { border-color: var(--accent); color: var(--accent); }
+.why { color: var(--muted); }
+.how { display: grid; gap: 0.5rem; min-width: 0; }
+.how ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 0.3rem; }
+.or { font-size: 0.875rem; color: var(--muted); font-weight: 500; }
+.cmd { display: flex; align-items: stretch; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.cmd code { flex: 1; min-width: 0; overflow-x: auto; white-space: pre; padding: 0.6rem 0.8rem; font-size: 0.9rem; line-height: 1.6; }
+.copy {
+  flex: none; font: inherit; font-size: 0.875rem; font-weight: 500;
+  border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--accent);
+  padding: 0 0.9rem; cursor: pointer; border-radius: 0 8px 8px 0;
+}
+.copy:hover { background: var(--accent-soft); }
+.copy.ok { color: var(--done); }
+.check { background: var(--done-soft); border-radius: 10px; padding: 0.85rem 1rem; display: grid; gap: 0.5rem; }
+.check-label { font-size: 0.875rem; font-weight: 600; color: var(--done); letter-spacing: 0.02em; }
+.tick { display: flex; align-items: center; gap: 0.6rem; font-weight: 600; cursor: pointer; width: fit-content; }
+.tick input { width: 1.35rem; height: 1.35rem; accent-color: var(--done); margin: 0; flex: none; cursor: pointer; }
+.trouble { font-size: 0.95rem; color: var(--muted); }
+.trouble b { color: var(--warn); font-weight: 600; }
+
+/* lists below */
+.plain { display: grid; gap: 0.75rem; }
+.plain ul { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.35rem; }
+.faq { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.faq div { padding: 0.8rem 0; border-bottom: 1px solid var(--line); display: grid; gap: 0.2rem; }
+.faq dt { font-weight: 600; }
+.faq dd { margin: 0; color: var(--muted); }
+
+.ready { background: var(--done-soft); border: 1.5px solid var(--done); border-radius: 12px; padding: 1.1rem 1.25rem; display: grid; gap: 0.35rem; }
+.ready h2 { color: var(--done); }
+
+footer { color: var(--muted); font-size: 0.9rem; display: grid; gap: 0.35rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+footer ul { margin: 0; padding-left: 1.2rem; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.65rem; }
+  .step { padding-left: 1.1rem; padding-top: 3.6rem; }
+  .step::before { top: 1.2rem; }
+}
+</style>
+
+<main class="wrap">
+  <header class="top">
+    <p class="eyebrow">ทำให้เสร็จก่อนเรียนครั้งแรก</p>
+    <h1>ติดตั้งก่อนเรียน Codex</h1>
+    <p class="lede">ทำทีละข้อบนเครื่อง Windows ของบริษัท แต่ละข้อมีวิธีเช็กว่าลงสำเร็จแล้ว</p>
+  </header>
+
+  <section class="rules" aria-labelledby="rules-h">
+    <h2 id="rules-h">กฎ 3 ข้อ จำไว้ตลอดคอร์ส</h2>
+    <ul>
+      <li>ใน Codex เลือก <b>Ask for approval</b> ไว้ตลอด Codex จะถามก่อนทำอะไรเสี่ยง ห้ามเลือก <b>Full access</b> เพราะมันจะแก้หรือลบไฟล์นอกโฟลเดอร์งานได้</li>
+      <li>ห้ามพิมพ์หรือแนบรหัสผ่าน ข้อมูลลูกค้า หรือข้อมูลลับของบริษัท</li>
+      <li>เปิดให้ Codex เห็นแค่โฟลเดอร์ฝึก ห้ามเปิดทั้ง Desktop หรือไดรฟ์แชร์</li>
+    </ul>
+  </section>
+
+  <section class="steps-sec" aria-labelledby="steps-h">
+    <h2 id="steps-h">รายการติดตั้ง</h2>
+    <p class="why">ลงโปรแกรมแค่คลิก ไม่ต้องพิมพ์คำสั่ง ถ้าเครื่องขอรหัส admin ให้แจ้ง IT ลงเสร็จแล้วเช็กได้ใน PowerShell: กดปุ่ม Start พิมพ์ PowerShell แล้วกด Enter จากนั้นพิมพ์คำสั่งที่ให้ไว้ในแต่ละข้อ แล้วกด Enter (ลงโปรแกรมเสร็จแล้วต้องเปิด PowerShell ใหม่)</p>
+    <ol class="steps" id="steps">
+
+      <li class="step" id="step-app">
+        <div class="step-head"><h3>ลงแอป ChatGPT</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">Codex อยู่ในแอปนี้ เป็นตัวหลักที่ใช้ทั้งคอร์ส</p>
+        <div class="how">
+          <p>เปิด Microsoft Store ค้นหา <b>ChatGPT</b> เลือกตัวที่เขียนว่า OpenAI แล้วกดติดตั้ง</p>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>ในเมนู Start มีแอป ChatGPT และเปิดได้</p>
+        </div>
+        <p class="trouble"><b>ถ้าไม่ได้:</b> ถ้าเปิด Microsoft Store ไม่ได้ ให้แจ้ง IT ช่วยลงให้ ถ้าเจอแอปชื่อ ChatGPT Classic อันนั้นเป็นรุ่นเก่า ไม่ใช่ตัวที่ใช้เรียน</p>
+      </li>
+
+      <li class="step" id="step-signin">
+        <div class="step-head"><h3>เข้าสู่ระบบด้วยบัญชีบริษัท</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">คอร์สนี้ใช้ ChatGPT ของบริษัท งานที่ทำในบัญชีบริษัท โดยปกติจะไม่ถูกเอาไปฝึก AI</p>
+        <div class="how"><p>เปิดแอป กด Sign in แล้วใช้อีเมลบริษัท ถ้ามีให้เลือก workspace ให้เลือกของบริษัท</p></div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>เปลี่ยนเมนูด้านบนของแอปเป็น <b>Codex</b> ได้ และบัญชีที่ใช้อยู่เป็นของบริษัท</p>
+        </div>
+        <p class="trouble"><b>ถ้าไม่ได้:</b> ถ้าเข้าไปแล้วเป็นบัญชีส่วนตัว ให้ออกจากระบบ แล้วเข้าใหม่ด้วยอีเมลบริษัท</p>
+      </li>
+
+      <li class="step" id="step-git">
+        <div class="step-head"><h3>ลง Git</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">Git ช่วยเซฟงานไว้เป็นจุด ๆ ถ้า Codex แก้พลาดก็ย้อนกลับได้ เราไม่ต้องใช้เอง Codex จะใช้ให้</p>
+        <div class="how">
+          <ol>
+            <li>เปิดเว็บ <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com/download/win</a> แล้วโหลดตัวติดตั้ง</li>
+            <li>เปิดไฟล์ที่โหลดมา กด Next ไปเรื่อย ๆ ไม่ต้องเปลี่ยนอะไร แล้วกด Install</li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>ในเมนู Start มีโปรแกรมชื่อ Git Bash</p>
+          <p>หรือเปิด PowerShell พิมพ์ <code class="nw">git --version</code> ต้องขึ้น <code class="nw">git version</code> ตามด้วยเลขรุ่น</p>
+        </div>
+      </li>
+
+      <li class="step" id="step-python">
+        <div class="step-head"><h3>ลง Python</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">Codex จะเขียนโปรแกรมเล็ก ๆ ด้วย Python ไว้รวมไฟล์ Excel หรือ CSV และทำรายงานให้</p>
+        <div class="how">
+          <ol>
+            <li>เปิดเว็บ <a href="https://www.python.org/downloads/windows/" target="_blank" rel="noopener">python.org/downloads/windows</a> เลือกรุ่นล่าสุด แล้วโหลด Windows installer (64-bit)</li>
+            <li>เปิดไฟล์ที่โหลดมา <b>ติ๊กช่อง Add python.exe to PATH</b> ด้านล่างก่อน แล้วกด Install Now</li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>ในเมนู Start มีโปรแกรมชื่อ Python 3 ตามด้วยเลขรุ่น</p>
+          <p>หรือเปิด PowerShell พิมพ์ <code class="nw">python --version</code> ต้องขึ้น <code class="nw">Python 3</code> ตามด้วยเลขรุ่น ถ้าขึ้นว่า Python was not found หรือ Microsoft Store เด้งขึ้นมา แปลว่าไม่ได้ติ๊ก Add python.exe to PATH</p>
+        </div>
+        <p class="trouble"><b>ถ้าไม่ได้:</b> ถ้าลืมติ๊ก Add python.exe to PATH ให้ถอน Python ออก แล้วลงใหม่ คราวนี้ติ๊กช่องนั้นด้วย</p>
+      </li>
+
+      <li class="step" id="step-node">
+        <div class="step-head"><h3>ลง Node.js (รุ่น LTS)</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">ใช้เปิดระบบตัวอย่างที่ใช้ฝึก และใช้รันเทสอัตโนมัติ</p>
+        <div class="how">
+          <ol>
+            <li>เปิดเว็บ <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a> แล้วโหลดรุ่น <b>LTS</b> แบบ Windows Installer (.msi)</li>
+            <li>เปิดไฟล์ที่โหลดมา กด Next ไปเรื่อย ๆ ไม่ต้องเปลี่ยนอะไร แล้วกด Install</li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>ในเมนู Start มีโฟลเดอร์หรือโปรแกรมชื่อ Node.js</p>
+          <p>หรือเปิด PowerShell พิมพ์ <code class="nw">node -v</code> ต้องขึ้นเลขรุ่นที่ขึ้นต้นด้วย <code>v</code></p>
+        </div>
+      </li>
+
+      <li class="step" id="step-vscode">
+        <div class="step-head"><h3>ลง VS Code กับส่วนเสริม Codex</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">เอาไว้เปิดอ่านและแก้ไฟล์ที่ Codex ทำให้ เช่น ไฟล์เทส หรือโปรแกรม Python</p>
+        <div class="how">
+          <ol>
+            <li>เปิดเว็บ <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a> กด Download for Windows แล้วลงตามที่ตั้งไว้ ไม่ต้องเปลี่ยนอะไร</li>
+            <li>เปิด VS Code กด <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> ค้นหา <b>Codex</b> เลือกตัวที่เขียนว่า OpenAI กด Install แล้วเข้าสู่ระบบด้วยบัญชีบริษัท</li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>แถบด้านข้างของ VS Code มีไอคอน Codex และกดคุยได้ (เช็กว่าลง VS Code แล้ว: เปิด PowerShell พิมพ์ <code class="nw">code --version</code> บรรทัดแรกต้องเป็นเลขรุ่น)</p>
+        </div>
+      </li>
+
+      <li class="step" id="step-folder">
+        <div class="step-head"><h3>สร้างโฟลเดอร์ไว้ฝึก</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <p class="why">Codex ทำงานได้แค่ในโฟลเดอร์ที่เราเปิดให้ ทั้งคอร์สใช้โฟลเดอร์นี้โฟลเดอร์เดียว</p>
+        <div class="how">
+          <ol>
+            <li>เปิด File Explorer (กดปุ่ม <kbd>Windows</kbd>+<kbd>E</kbd>)</li>
+            <li>คลิกช่องที่อยู่ด้านบน พิมพ์ <b>%USERPROFILE%</b> แล้วกด <kbd>Enter</kbd></li>
+            <li>คลิกขวาที่ว่าง เลือก New แล้วเลือก Folder ตั้งชื่อว่า <b>codex-practice</b></li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>มีโฟลเดอร์ <code>C:\Users\ชื่อของคุณ\codex-practice</code></p>
+        </div>
+      </li>
+
+      <li class="step" id="step-test">
+        <div class="step-head"><h3>ลองใช้ Codex ครั้งแรก</h3><span class="chip">ทุกคน</span><span class="chip req">ต้องทำ</span></div>
+        <div class="how">
+          <ol>
+            <li>เปิดแอป ChatGPT แล้วเปลี่ยนเมนูด้านบนเป็น <b>Codex</b></li>
+            <li>เปิดโฟลเดอร์ <code>codex-practice</code> ที่เพิ่งสร้าง</li>
+            <li>ใต้ช่องพิมพ์ เลือก <b>Ask for approval</b></li>
+            <li>คัดลอกข้อความด้านล่างไปวางทีละอัน แล้วกดส่ง</li>
+          </ol>
+          <div class="cmd"><code>สร้างไฟล์ hello.txt ในโฟลเดอร์นี้ เขียนข้างในว่า สวัสดี Codex</code><button class="copy" type="button">คัดลอก</button></div>
+          <div class="cmd"><code>ดูหน่อยว่าเครื่องนี้มี git, node, python หรือยัง บอกเลขรุ่นด้วย ไม่ต้องลงอะไรเพิ่ม</code><button class="copy" type="button">คัดลอก</button></div>
+          <p>ถ้า Codex ขออนุญาต ให้อ่านก่อนว่ามันจะทำอะไร แล้วค่อยกดอนุญาต</p>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>มีไฟล์ <code>hello.txt</code> ในโฟลเดอร์ และ Codex บอกเลขรุ่นของ git, node และ python ได้ครบ</p>
+        </div>
+        <p class="trouble"><b>ถ้าไม่ได้:</b> ถ้า Codex บอกว่าหาโปรแกรมที่ลงไปแล้วไม่เจอ ให้ปิดแอป ChatGPT แล้วเปิดใหม่ ยังไม่เจออีกให้รีสตาร์ตเครื่อง</p>
+      </li>
+
+      <li class="step" id="step-access">
+        <div class="step-head"><h3>ขอสิทธิ์เข้าระบบ TEST ของบริษัท</h3><span class="chip">สาย QA</span><span class="chip">ไม่บังคับ</span></div>
+        <p class="why">ตอนเรียนใช้ระบบตัวอย่างในไฟล์ฝึก สิทธิ์นี้เอาไว้ใช้ตอนเรียนจบแล้วไปทำงานจริง ขอไว้ก่อนได้ ห้ามใช้บัญชีหรือระบบจริง (production)</p>
+        <div class="how">
+          <p>ขอจากหัวหน้าหรือ IT 2 อย่าง (ไม่ต้องขอสิทธิ์เข้าฐานข้อมูล)</p>
+          <ol>
+            <li>บัญชี git server ของบริษัท</li>
+            <li>บัญชีผู้ใช้ทดสอบในระบบ TEST</li>
+          </ol>
+        </div>
+        <div class="check">
+          <p class="check-label">ผลที่ควรเห็น</p>
+          <p>เข้าระบบ TEST ด้วยบัญชีทดสอบได้ และเปิดหน้า git server ของบริษัทได้</p>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section class="plain" aria-labelledby="skip-h">
+    <h2 id="skip-h">ไม่ต้องลงเอง</h2>
+    <ul>
+      <li>WSL กับ Docker: Codex บน Windows ไม่ต้องใช้</li>
+      <li>Playwright: ในห้องเรียนจะให้ Codex ลงให้</li>
+      <li>Codex CLI: ไม่ต้องลง ถ้าต้องใช้ผู้สอนจะบอก</li>
+    </ul>
+  </section>
+
+  <section class="plain" aria-labelledby="faq-h">
+    <h2 id="faq-h">ติดตรงไหน ดูตรงนี้</h2>
+    <dl class="faq">
+      <div><dt>เครื่องขอรหัส admin</dt><dd>ไม่ต้องหารหัสเอง แจ้ง IT ว่าต้องลงโปรแกรมอะไรบ้าง ส่งหน้านี้ไปให้ดูได้เลย</dd></div>
+      <div><dt>เปิด Microsoft Store หรือเว็บดาวน์โหลดไม่ได้</dt><dd>แจ้ง IT ให้ลงให้ ส่งลิงก์หน้านี้ไปด้วย</dd></div>
+      <div><dt>ลงแล้ว แต่ PowerShell ขึ้นว่า is not recognized หรือ Codex บอกว่าหา git, node, python ไม่เจอ</dt><dd>ปิด PowerShell หรือแอป ChatGPT แล้วเปิดใหม่ ยังไม่ได้ให้รีสตาร์ตเครื่อง ยังไม่ได้อีกให้ลงโปรแกรมนั้นใหม่</dd></div>
+      <div><dt>Windows ถามว่าจะเปิดไฟล์ที่โหลดมาไหม</dt><dd>เช็กว่าโหลดมาจากเว็บที่ลิงก์ไว้ในหน้านี้ แล้วกดเปิดได้เลย</dd></div>
+    </dl>
+  </section>
+
+  <footer>
+    <p>ข้อมูลจากเว็บทางการ ณ พฤศจิกายน 2026 ถ้าหน้าจอจริงไม่เหมือนที่เขียน ถามผู้สอนในวันเรียนได้</p>
+    <ul>
+      <li><a href="https://learn.chatgpt.com/docs/quickstart" target="_blank" rel="noopener">ChatGPT desktop app quickstart</a></li>
+      <li><a href="https://learn.chatgpt.com/docs/windows/windows-app" target="_blank" rel="noopener">ChatGPT desktop app for Windows</a></li>
+      <li><a href="https://docs.python.org/3/using/windows.html" target="_blank" rel="noopener">Using Python on Windows</a></li>
+    </ul>
+  </footer>
+</main>
+
+<script>
+(function () {
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentNode.querySelector('code');
+      var text = code.textContent;
+      function flash(msg) {
+        btn.textContent = msg;
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'คัดลอก'; btn.classList.remove('ok'); }, 1600);
+      }
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(code);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        flash('กด Ctrl+C');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash('คัดลอกแล้ว'); }, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+})();
+</script>
