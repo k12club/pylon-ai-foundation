@@ -1,0 +1,17 @@
+<section id="ws-ext" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ 4</p>
+<h2>ติดตั้ง skill ของทีม และต่อ MCP ตัวแรก</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>ใน File Explorer เปิด practice-kit\common\team-skills คลิกขวาโฟลเดอร์ data-check แล้วเลือก Copy</li>
+<li>พิมพ์ %USERPROFILE% ในช่องที่อยู่ด้านบน กด Enter เข้าโฟลเดอร์ .agents แล้ว skills (ถ้าไม่มีให้สร้าง) แล้ว Paste</li>
+<li>ปิดแอป ChatGPT แล้วเปิดใหม่ สั่ง $data-check กับไฟล์ใน practice-kit\biz\reports</li>
+<li>สาย QA: ไปที่ Settings &gt; MCP servers &gt; Add server ใส่ค่าทางขวา กด Save แล้ว Restart จากนั้นพิมพ์ /mcp</li>
+</ol>
+<p class="code"><span class="label">ค่าที่ใส่ใน Add server (สาย QA)</span><br>ชื่อ: playwright<br>ชนิด: STDIO<br>คำสั่ง: npx @playwright/mcp@latest<br><br><span class="label">พิมพ์ให้ Codex</span><br>ใช้ MCP playwright เปิด http://127.0.0.1:3100 แล้วบอกว่าหน้าเข้าสู่ระบบมีปุ่มอะไรบ้าง อย่ากดอะไร</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> $data-check ตอบเป็นตารางปัญหาของข้อมูล และสาย QA เห็น playwright ใน /mcp</p></div>
+<aside>สายหน่วยงานเปิดดูหน้า Settings MCP servers กับ Plugins ได้ แต่ยังไม่ต้องติดตั้ง ถ้า Windows ไม่ยอมให้ตั้งชื่อโฟลเดอร์ที่ขึ้นต้นด้วยจุด ให้พิมพ์ .agents. (มีจุดท้าย) ถ้าแอปแยกช่อง arguments ให้ใส่ npx ในช่องคำสั่ง และ @playwright/mcp@latest ในช่อง arguments ถ้า MCP ไม่ขึ้นบน Windows ลองเปลี่ยนเป็น npx.cmd ก่อนลองต้องเปิด start.bat ของระบบตัวอย่างไว้</aside>
+</section>

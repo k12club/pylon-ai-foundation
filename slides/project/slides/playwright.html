@@ -1,0 +1,15 @@
+<section id="playwright" data-transition="fade">
+<div class="head">
+<p class="eyebrow">QA-3 ถึง QA-5</p>
+<h2>ให้ Codex รันเทสให้ ไม่ต้องจำคำสั่ง</h2>
+</div>
+<table>
+<tr class="th"><th style="width:32%">อยากทำ</th><th style="width:68%">พิมพ์บอก Codex</th></tr>
+<tr><td>รันเทสทั้งหมด</td><td>รันเทสทั้งหมด แล้วสรุปเป็นตาราง ว่าข้อไหนผ่าน ข้อไหนไม่ผ่าน เพราะอะไร</td></tr>
+<tr><td>รันข้อเดียว</td><td>รันเฉพาะเทส TC-07</td></tr>
+<tr><td>หาเทสที่ผ่านบ้างไม่ผ่านบ้าง</td><td>รัน TC-05 ซ้ำ 5 รอบ แล้วบอกว่าไม่ผ่านรอบไหน เพราะอะไร</td></tr>
+<tr><td>ดูว่าไม่ผ่านเพราะอะไร</td><td>ดู error ของเทสที่ไม่ผ่าน แล้วบอกว่าเป็นที่ระบบ หรือเทสเขียนผิด</td></tr>
+<tr><td>เช็กว่าเทสตรวจจริง</td><td>บอกหน่อยว่าแต่ละเทส จับ bug แบบไหนได้ ยังไม่ต้องแก้ไฟล์</td></tr>
+</table>
+<aside>คำสั่งที่ Codex ใช้เบื้องหลัง: npx playwright test, -g "TC-07", --repeat-each=5, npx playwright show-report ตั้ง workers = 1 เพราะทุกเทสใช้ระบบตัวอย่างตัวเดียวกัน ถ้าขึ้น running scripts is disabled ให้บอก Codex ใช้ npx.cmd</aside>
+</section>

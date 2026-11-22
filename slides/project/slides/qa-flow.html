@@ -1,0 +1,19 @@
+<section id="qa-flow" data-transition="fade">
+<div class="head">
+<p class="eyebrow">สาย QA ทีละขั้น</p>
+<h2>จากข้อกำหนด จนได้เทสทั้งชุด</h2>
+</div>
+<div class="flow">
+<div class="step"><p class="n">QA-1</p><h3>test case</h3><p class="text">เขียนจาก ข้อกำหนด ทุกข้อ</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="1"></x-shape>
+<div class="step fragment" data-fragment-index="1"><p class="n">QA-2</p><h3>ลองเล่น หา bug</h3><p class="text">ให้ Codex ลองกด แล้วเขียนรายงาน</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="2"></x-shape>
+<div class="step key fragment" data-fragment-index="2"><p class="n">QA-3</p><h3>เทสหน้าเว็บ</h3><p class="text">เขียนครั้งเดียว รันได้ทุกวัน</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="3"></x-shape>
+<div class="step fragment" data-fragment-index="3"><p class="n">QA-4</p><h3>เทส API</h3><p class="text">เช็กว่าระบบ ตอบถูก ทุกกรณี</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="4"></x-shape>
+<div class="step fragment" data-fragment-index="4"><p class="n">QA-5</p><h3>รันทั้งชุด</h3><p class="text">สรุปว่าอะไรผ่าน อะไรไม่ผ่าน</p></div>
+</div>
+<p class="lead">ฝึกกับระบบเบิกวัสดุตัวอย่าง (ดับเบิลคลิก start.bat) มีข้อกำหนด 17 ข้อ และมีจุดที่ทำงานผิดซ่อนอยู่</p>
+<aside>@Browser เหมาะกับการลองเล่นหา bug แต่ไม่เหมาะกับงานที่ต้องทำซ้ำทุกวัน เพราะอัปโหลดไฟล์เองไม่ได้ และต้องถามก่อนส่งข้อมูล งานที่ทำซ้ำให้ใช้เทสอัตโนมัติ (Playwright)</aside>
+</section>

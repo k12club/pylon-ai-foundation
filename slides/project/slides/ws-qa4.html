@@ -1,0 +1,17 @@
+<section id="ws-qa4" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ QA-4</p>
+<h2>เทส API: ระบบตอบถูกทุกกรณีไหม</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>เปิดระบบตัวอย่างด้วย start.bat ถ้ายังไม่ได้เปิด</li>
+<li>ในโฟลเดอร์ qa-tests ส่งข้อความทางขวาให้ Codex</li>
+<li>สั่ง: รันเทส tests/api.spec.ts แล้วสรุปผล</li>
+<li>ให้สรุปเป็นตาราง: ควรได้รหัสอะไร / ได้จริงเท่าไร / ข้อกำหนดข้อไหน</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>อ่านสเปกที่ http://127.0.0.1:3100/openapi.json แล้วเขียน API test ไว้ใน tests/api.spec.ts<br>ให้ครอบ 4 แบบ: ไม่ล็อกอินต้องได้ 401 (REQ-02), ข้อมูลผิดต้องได้ 400 (REQ-05 ถึง 07), คนไม่มีสิทธิ์ต้องได้ 403 (REQ-15), เปลี่ยนสถานะซ้ำต้องได้ 409 (REQ-16)<br>ก่อนแต่ละเทส เรียก POST /api/reset ให้ข้อมูลกลับเป็นค่าเริ่มต้น<br>บัญชีผู้อนุมัติอ่านจาก APPROVER_USER กับ APPROVER_PASSWORD ถ้าไม่มี ใช้ approver1 / demo1234</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> มีเทสครบ 4 แบบ และเจอ bug ที่กดจากหน้าเว็บมองไม่เห็นอย่างน้อย 1 จุด</p></div>
+<aside>401 403 400 409 คือรหัสที่ระบบตอบกลับ บอกว่าผิดเพราะอะไร bug ที่เห็นได้ทาง API เท่านั้น: ผู้ขอเบิกกดอนุมัติได้ (REQ-15), ไม่อนุมัติใบที่ตัดสินไปแล้วได้ (REQ-16), รหัสวัสดุที่ไม่มีอยู่ได้ 500 (REQ-07) รายละเอียดใน answer-key.md</aside>
+</section>

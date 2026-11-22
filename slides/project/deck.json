@@ -1,0 +1,21 @@
+{
+  "v": 5,
+  "createdOnFiles": { "v": 1, "at": "2026-11-21T13:45:00Z" },
+  "lists": "css",
+  "format": { "v": 1, "shared": ["project/deck.css"] },
+  "title": "สไลด์สอน Codex",
+  "order": ["cover", "outcome", "weeks", "rules", "install", "install-check", "ws-setup", "modes", "prompt", "ws-prompt", "loop", "git", "ws-git", "config", "ws-config", "extend", "ws-ext", "qa-rule", "qa-flow", "ws-qa1", "ws-qa2", "playwright", "ws-qa3", "ws-qa4", "biz-flow", "ws-biz1", "ws-biz2", "biz-check", "ws-biz3", "trouble"],
+  "sections": {
+    "s1": { "description": "เรียนแล้วได้อะไร เรียนตามลำดับไหน กฎที่ต้องจำ และโปรแกรมที่ต้องลง", "start": "cover" },
+    "s2": { "description": "พื้นฐานที่ทุกคนใช้: สั่งงาน เซฟงาน ตั้งกฎ และใช้ของที่ทีมทำไว้", "start": "modes" },
+    "s3": { "description": "สาย QA: จากข้อกำหนดจนได้เทสทั้งชุด", "start": "qa-rule" },
+    "s4": { "description": "สายหน่วยงาน: จากงานที่ทำซ้ำจนได้เครื่องมือที่เพื่อนใช้ได้", "start": "biz-flow" },
+    "s5": { "description": "ติดตรงไหน แก้ยังไง", "start": "trouble" }
+  },
+  "faces": {
+    "kanit": { "family": "Kanit", "href": "https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" },
+    "noto-sans-thai": { "family": "Noto Sans Thai", "href": "https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400..700&display=swap" },
+    "jetbrains-mono": { "family": "JetBrains Mono", "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" }
+  },
+  "designSystems": []
+}
