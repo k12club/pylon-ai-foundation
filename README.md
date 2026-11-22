@@ -18,7 +18,7 @@
 | `practice-kit.zip` | `practice-kit/` ที่บีบอัดแล้ว ไฟล์นี้คือไฟล์ที่ส่งให้ผู้เรียน |
 | `trainer-kit/` | ของผู้สอน: เฉลย, สคริปต์สร้างไฟล์ฝึก, สคริปต์ตรวจชุดฝึก |
 
-สไลด์ (30 หน้า) และคู่มือเทคนิคอยู่บน claude.ai ต้องได้รับแชร์ก่อนจึงจะเปิดได้
+สไลด์ (53 หน้า) และคู่มือเทคนิคอยู่บน claude.ai ต้องได้รับแชร์ก่อนจึงจะเปิดได้
 
 - สไลด์: https://claude.ai/artifact/Ewe5rrSAWMVjmsbErwakFD
 - คู่มือ: https://claude.ai/artifact/PX6qKPhs8t5pogKnkE613t
