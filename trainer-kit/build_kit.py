@@ -285,8 +285,11 @@ def outputs():
     files[os.path.join(KIT, "biz", "price-list.csv")] = price_list_bytes()
     for fname, rows in gen_session2().items():
         files[os.path.join(KIT, "common", "session2", fname)] = csv_bytes(["date", "branch", "product_group", "qty", "amount_baht"], rows)
+    # copy-to-Codex page: the source is site/prompts.html (same page as codex.jeerawut.com/prompts), shipped CRLF + BOM like other kit text
+    page = open(os.path.join(ROOT, "site", "prompts.html"), encoding="utf-8-sig").read()
+    files[os.path.join(KIT, "prompts.html")] = ("﻿" + page.replace("\r\n", "\n").replace("\n", "\r\n")).encode("utf-8")
     key = build_key(all_rows)
-    files[KEY_PATH] = (json.dumps(key, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    files[KEY_PATH] =(json.dumps(key, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     return files, key, all_rows
 
 

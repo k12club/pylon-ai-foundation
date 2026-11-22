@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ข้อความลองทำ Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column in slide order; each exercise = heading + copy boxes labelled with the slide step they belong to */
+:root {
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --ink: #17202B;
+  --muted: #4F5B6B;
+  --line: #D5DBE3;
+  --accent: #2347B5;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E5EBFA;
+  --done: #14713F;
+  --warn: #93400D;
+  --warn-soft: #FAEDE2;
+  --code-bg: #ECEFF4;
+  --font-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+    --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+    --done: #63CF99; --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+  --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+  --done: #63CF99; --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 4rem;
+  display: grid;
+  gap: 2rem;
+}
+h1, h2 { margin: 0; text-wrap: balance; line-height: 1.35; }
+h1 { font-size: 2rem; font-weight: 700; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+
+.top { display: grid; gap: 1rem; }
+.eyebrow { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+.lede { color: var(--muted); }
+.note { background: var(--warn-soft); border-radius: 12px; padding: 1rem 1.15rem; display: grid; gap: 0.35rem; }
+.note b { color: var(--warn); }
+
+.jump { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.jump a {
+  display: inline-block; padding: 0.3rem 0.85rem; border-radius: 999px;
+  border: 1.5px solid var(--line); background: var(--surface); color: var(--ink);
+  font-size: 0.95rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+}
+.jump a:hover { border-color: var(--accent); color: var(--accent); }
+
+.ex { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; display: grid; gap: 0.9rem; scroll-margin-top: 1rem; min-width: 0; }
+.ex h2 .tag { color: var(--accent); }
+.item { display: grid; gap: 0.35rem; min-width: 0; }
+.when { color: var(--muted); font-size: 0.95rem; }
+.when b { color: var(--ink); font-weight: 600; }
+.cmd { display: flex; align-items: stretch; background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.cmd code {
+  flex: 1; min-width: 0; padding: 0.6rem 0.8rem;
+  font-family: var(--font-body); font-size: 0.95rem; line-height: 1.65;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.copy {
+  flex: none; font: inherit; font-size: 0.9rem; font-weight: 600;
+  border: 0; border-left: 1px solid var(--line); background: transparent; color: var(--accent);
+  padding: 0 0.9rem; cursor: pointer; border-radius: 0 8px 8px 0; min-width: 5.5rem;
+}
+.copy:hover { background: var(--accent-soft); }
+.copy.ok { color: var(--done); }
+
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.65rem; }
+  .ex { padding: 1rem; }
+  .copy { min-width: 4.75rem; padding: 0 0.6rem; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <p class="eyebrow">เปิดหน้านี้ไว้ข้างแอป Codex · <a href="https://codex.jeerawut.com/">ดูสไลด์</a></p>
+    <h1>ข้อความลองทำ Codex</h1>
+    <p class="lede">กด <b>คัดลอก</b> แล้วไปคลิกช่องพิมพ์ใน Codex กด Ctrl+V แล้วกด Enter ทำตามลำดับข้อบนสไลด์ คำสั่งสั้น ๆ อย่าง <b>/new</b> ให้พิมพ์เอง</p>
+    <div class="note">
+      <p><b>คำที่มี @ หรือ $ นำหน้า</b> เช่น @meeting-note.txt, @Browser, $data-check ถ้าวางแล้วไม่ขึ้นเป็นป้าย หรือ Codex ตอบว่าหาไม่เจอ ให้ลบคำนั้นออก พิมพ์ @ หรือ $ เอง แล้วเลือกจากรายการที่ขึ้นมา</p>
+    </div>
+    <nav aria-label="ไปที่ลองทำ">
+      <ul class="jump">
+        <li><a href="#ws0">ลองทำ 0</a></li>
+        <li><a href="#ws1">ลองทำ 1</a></li>
+        <li><a href="#ws2">ลองทำ 2</a></li>
+        <li><a href="#ws3">ลองทำ 3</a></li>
+        <li><a href="#ws4">ลองทำ 4</a></li>
+        <li><a href="#qa1">QA-1</a></li>
+        <li><a href="#qa2">QA-2</a></li>
+        <li><a href="#qa3">QA-3</a></li>
+        <li><a href="#qa4">QA-4</a></li>
+        <li><a href="#biz1">BIZ-1</a></li>
+        <li><a href="#biz2">BIZ-2</a></li>
+        <li><a href="#biz3">BIZ-3</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="ex" id="ws0" aria-labelledby="ws0-h">
+    <h2 id="ws0-h"><span class="tag">ลองทำ 0</span> เตรียมไฟล์ฝึก แล้วทักทาย Codex</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 1</b> วางในช่องที่อยู่ด้านบนของ File Explorer แล้วกด Enter</p>
+      <div class="cmd"><code>%USERPROFILE%</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> วางใน Codex แล้วกดส่ง</p>
+      <div class="cmd"><code>ช่วยดูในโฟลเดอร์ practice-kit หน่อย ว่ามีโฟลเดอร์อะไรบ้าง แต่ละอันเอาไว้ทำอะไร ยังไม่ต้องแก้ไฟล์นะ</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="ws1" aria-labelledby="ws1-h">
+    <h2 id="ws1-h"><span class="tag">ลองทำ 1</span> สรุปบันทึกประชุม 2 แบบ แล้วเทียบกัน</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> แบบสั่งสั้น ๆ</p>
+      <div class="cmd"><code>สรุป @meeting-note.txt ให้หน่อย</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> พิมพ์ /new ก่อน แล้ววางแบบบอกครบ 5 อย่าง</p>
+      <div class="cmd"><code>อยากได้อะไร: สรุปประชุมให้หัวหน้าที่ไม่ได้เข้า อ่านจบใน 1 นาที
+ใช้ข้อมูลจาก: @meeting-note.txt
+ห้ามทำอะไร: ห้ามเติมชื่อ วันที่ ตัวเลข ที่บันทึกไม่ได้เขียนไว้ ถ้าไม่มีให้เขียนว่า "ไม่ระบุ"
+อยากได้ผลแบบไหน: 3 หัวข้อ เรื่องที่ตกลงแล้ว / งานที่ต้องทำ (ใครทำ เสร็จวันไหน) / เรื่องที่ยังค้าง
+ดูยังไงว่าถูก: ทุกงานมีชื่อคนกับวันที่จากบันทึก หรือเขียนว่า "ไม่ระบุ"</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="ws2" aria-labelledby="ws2-h">
+    <h2 id="ws2-h"><span class="tag">ลองทำ 2</span> ให้ Codex รวม 3 ไฟล์ แล้วลองย้อนกลับ</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> เซฟจุดแรกก่อนแก้</p>
+      <div class="cmd"><code>เปิดใช้ git ในโฟลเดอร์นี้ แล้ว commit จุดแรก ชื่อ ก่อนแก้</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> สั่งรวมไฟล์</p>
+      <div class="cmd"><code>รวมไฟล์ sales-north.csv sales-central.csv sales-south.csv เป็นไฟล์ summary.csv สรุปยอดตามสาขา และตามกลุ่มสินค้า ใช้ PowerShell เท่านั้น บันทึกให้ Excel เปิดภาษาไทยได้ ห้ามแก้ไฟล์เดิม แล้วบอกยอดรวมทั้งหมด</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ดูว่าแก้อะไรไปบ้าง</p>
+      <div class="cmd"><code>ใช้ git เช็กว่าแก้ไฟล์ไหนไปบ้าง</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> ยอดสาขาเหนือตรงกับที่คิดเอง</p>
+      <div class="cmd"><code>commit จุดนี้ไว้</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> ยอดไม่ตรง</p>
+      <div class="cmd"><code>ย้อนกลับไปจุดล่าสุด</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="ws3" aria-labelledby="ws3-h">
+    <h2 id="ws3-h"><span class="tag">ลองทำ 3</span> ตั้งกฎให้ Codex แล้วทำ skill แรก</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 1</b> ใน project codex-practice</p>
+      <div class="cmd"><code>สร้างไฟล์ AGENTS.md ในโฟลเดอร์นี้ ใส่กฎตามนี้
+# กฎ
+- ตอบเป็นภาษาไทย
+- ก่อนแก้ไฟล์ บอกแผนสั้น ๆ ก่อน
+- ห้ามลบไฟล์ ถ้าจำเป็นต้องถามก่อน
+- ห้ามใส่รหัสผ่านลงในไฟล์</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> พิมพ์ /new ก่อน แล้วถาม</p>
+      <div class="cmd"><code>ตอนนี้คุณอ่านกฎจากไฟล์ AGENTS.md ไหนอยู่</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ทำ skill สรุปประชุม</p>
+      <div class="cmd"><code>$skill-creator สร้าง skill ชื่อ meeting-summary ใช้เมื่อฉันให้บันทึกประชุม แล้วอยากได้สรุปให้หัวหน้าที่ไม่ได้เข้า
+สรุปเป็น 3 หัวข้อ: เรื่องที่ตกลงแล้ว / งานที่ต้องทำ (ใครทำ เสร็จวันไหน) / เรื่องที่ยังค้าง
+ห้ามเติมชื่อ วันที่ ตัวเลข ที่บันทึกไม่ได้เขียนไว้ ถ้าไม่มีให้เขียนว่า "ไม่ระบุ"</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> พิมพ์ /new ก่อน แล้วลองใช้ skill</p>
+      <div class="cmd"><code>$meeting-summary สรุปไฟล์ practice-kit\common\session1\meeting-note.txt</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="ws4" aria-labelledby="ws4-h">
+    <h2 id="ws4-h"><span class="tag">ลองทำ 4</span> ติดตั้ง skill ของทีม และต่อ MCP ตัวแรก</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> วางในช่องที่อยู่ด้านบนของ File Explorer แล้วกด Enter</p>
+      <div class="cmd"><code>%USERPROFILE%</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> เปิดแอปใหม่แล้ว ลองใช้ skill ของทีม</p>
+      <div class="cmd"><code>$data-check ตรวจทุกไฟล์ใน practice-kit\biz\reports</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4 สาย QA</b> ช่องชื่อใน Add server (ชนิดเลือก STDIO)</p>
+      <div class="cmd"><code>playwright</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4 สาย QA</b> ช่องคำสั่งใน Add server</p>
+      <div class="cmd"><code>npx @playwright/mcp@latest</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4 สาย QA</b> Restart แล้ววางใน Codex</p>
+      <div class="cmd"><code>ใช้ MCP playwright เปิด http://127.0.0.1:3100 แล้วบอกว่าหน้าเข้าสู่ระบบมีปุ่มอะไรบ้าง อย่ากดอะไร</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="qa1" aria-labelledby="qa1-h">
+    <h2 id="qa1-h"><span class="tag">QA-1</span> เขียน test case จากข้อกำหนด</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 1</b> เซฟจุดแรกก่อนแก้</p>
+      <div class="cmd"><code>เปิดใช้ git ในโฟลเดอร์นี้ แล้ว commit จุดแรก ชื่อ ก่อนแก้</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> สั่งเขียน test case</p>
+      <div class="cmd"><code>ช่วยเขียน test case จาก requirements\requirements.md ข้อ REQ-04 ถึง REQ-09 บันทึกเป็น testcases.csv ให้ Excel เปิดภาษาไทยได้ มีคอลัมน์ TC-ID, REQ-ID, ขั้นตอน, ผลที่ควรได้, ประเภท
+ข้อกำหนดทุกข้อต้องมีกรณีปกติและกรณีผิด ค่าที่มีขอบเขต ให้ลองค่าต่ำสุด สูงสุด และเลยขอบไป 1
+ข้อกำหนดไม่ได้บอกตรงไหน จดคำถามไว้ใน questions.md อย่าเดา</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> พิมพ์ /new ก่อน แล้วให้ตรวจแบบหัวหน้า QA</p>
+      <div class="cmd"><code>ช่วยตรวจ testcases.csv แบบหัวหน้า QA: หา test case ที่ซ้ำกัน, ข้อที่ผลที่ควรได้ไม่ได้มาจาก requirements.md
+และกรณีที่ยังไม่มี test case ตอบเป็นตาราง ห้ามแก้ไฟล์</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="qa2" aria-labelledby="qa2-h">
+    <h2 id="qa2-h"><span class="tag">QA-2</span> ลองเล่นหา bug ด้วย @Browser</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> ส่งภารกิจ (เปิด start.bat ไว้ก่อน)</p>
+      <div class="cmd"><code>ใช้ @Browser ลองระบบที่ http://127.0.0.1:3100 (ชื่อผู้ใช้กับรหัสอยู่ใน README.md ในโฟลเดอร์นี้)
+ภารกิจ: หา bug ตอนค้นหาและกรองรายการ ตามข้อ REQ-11 ถึง REQ-14
+ลองพิมพ์ภาษาไทย ลองวันแรกกับวันสุดท้ายของช่วง ลองเว้นว่าง
+เจออะไรแปลก จดขั้นตอนและแคปหน้าจอไว้ใน findings.md ห้ามกดอนุมัติหรือไม่อนุมัติ ห้ามเดาสาเหตุในโค้ด</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> เขียนรายงาน bug ตามแบบ</p>
+      <div class="cmd"><code>เขียนรายงาน bug จาก findings.md ทีละเรื่อง ตามแบบนี้
+## [BUG] &lt;หน้าไหน&gt;: &lt;อะไรผิด 1 บรรทัด&gt;
+REQ: &lt;REQ-ID&gt;          ความรุนแรง: &lt;Critical / Major / Minor&gt;
+สภาพแวดล้อม: ระบบตัวอย่างบน 127.0.0.1:3100, บัญชี &lt;role&gt;, เบราว์เซอร์ในแอป
+ขั้นตอน:
+1. ...
+2. ...
+ผลที่ควรได้: &lt;อ้างข้อความในข้อกำหนด&gt;
+ผลที่เกิดจริง: &lt;สิ่งที่เห็น ตัวเลขจริง&gt;
+หลักฐาน: &lt;ไฟล์ภาพ&gt;</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="qa3" aria-labelledby="qa3-h">
+    <h2 id="qa3-h"><span class="tag">QA-3</span> เขียนเทสหน้าเว็บอัตโนมัติชุดแรก</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> ในโฟลเดอร์ qa-tests</p>
+      <div class="cmd"><code>ตั้งโปรเจกต์ Playwright ในโฟลเดอร์นี้ ด้วย npm init playwright@latest -- --quiet --browser=chromium --lang=ts แล้วเปิดใช้ git และ commit ทุกไฟล์
+ตั้งให้เทสไปที่ http://127.0.0.1:3100 ใช้ chromium อย่างเดียว รันทีละเทส (workers 1) แล้วลบไฟล์ตัวอย่าง example.spec.ts
+บัญชีทดสอบให้อ่านจาก TEST_USER กับ TEST_PASSWORD ถ้าไม่มี ใช้ requester1 / demo1234 (บัญชีสมมติ)</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ใส่กฎของโฟลเดอร์เทส</p>
+      <div class="cmd"><code>สร้างไฟล์ AGENTS.md ในโฟลเดอร์นี้ ใส่กฎตามนี้
+# โปรเจกต์เทส ระบบเบิกวัสดุ
+## สภาพแวดล้อม
+- ทดสอบกับ TEST เท่านั้น: http://127.0.0.1:3100 ห้ามชี้ไป production
+- บัญชีทดสอบอ่านจากตัวแปร TEST_USER และ TEST_PASSWORD
+## คำสั่ง
+- รันทั้งหมด: npx playwright test
+- รันไฟล์เดียว: npx playwright test tests/&lt;file&gt;.spec.ts
+## กฎการเขียนเทส
+- ชื่อเทสขึ้นต้นด้วย TC-ID เช่น "TC-07 รหัสผ่านผิดต้องเห็นข้อความแจ้ง"
+- locator ใช้ getByRole / getByLabel / getByTestId ห้ามใช้ CSS class หรือ XPath
+- ห้าม waitForTimeout ให้รอด้วย expect(...).toBeVisible() หรือ toHaveText()
+- เทสแต่ละข้อต้องรันเดี่ยวได้ ไม่พึ่งลำดับ
+- ถ้าเทสไม่ผ่านเพราะระบบทำงานผิดข้อกำหนด ห้ามแก้ค่าที่คาดไว้ให้ตรงกับระบบ ให้ปล่อยไว้แล้วรายงาน REQ-ID</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> เขียนเทสจาก testcases.csv</p>
+      <div class="cmd"><code>อ่าน testcases.csv เลือก TC ของ REQ-04 ถึง REQ-09 ที่ทดสอบผ่านหน้าเว็บ
+เขียนเทสใน tests/create-request.spec.ts ทีละ TC ตามกฎใน AGENTS.md
+ล็อกอินด้วย process.env.TEST_USER และ process.env.TEST_PASSWORD
+รัน npx playwright test tests/create-request.spec.ts แล้วรายงานตาราง TC-ID | ผ่าน/ไม่ผ่าน | สาเหตุ
+ไม่ผ่านเพราะเทสเขียนผิด (locator, การรอ) ให้แก้แล้วรันใหม่
+ไม่ผ่านเพราะระบบไม่ตรงข้อกำหนด ห้ามแก้ให้ผ่าน ให้รายงานเป็น bug</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> รันซ้ำ</p>
+      <div class="cmd"><code>รันเทสทั้งหมด 3 รอบ แล้วแยกว่าข้อไหนไม่ผ่านเพราะระบบผิด</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="qa4" aria-labelledby="qa4-h">
+    <h2 id="qa4-h"><span class="tag">QA-4</span> เทส API: ระบบตอบถูกทุกกรณีไหม</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> ในโฟลเดอร์ qa-tests</p>
+      <div class="cmd"><code>อ่านสเปกที่ http://127.0.0.1:3100/openapi.json แล้วเขียน API test ไว้ใน tests/api.spec.ts
+ให้ครอบ 4 แบบ: ไม่ล็อกอินต้องได้ 401 (REQ-02), ข้อมูลผิดต้องได้ 400 (REQ-05 ถึง 07), คนไม่มีสิทธิ์ต้องได้ 403 (REQ-15), เปลี่ยนสถานะซ้ำต้องได้ 409 (REQ-16)
+ก่อนแต่ละเทส เรียก POST /api/reset ให้ข้อมูลกลับเป็นค่าเริ่มต้น
+บัญชีผู้อนุมัติอ่านจาก APPROVER_USER กับ APPROVER_PASSWORD ถ้าไม่มี ใช้ approver1 / demo1234</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3-4</b> รันแล้วสรุปเป็นตาราง</p>
+      <div class="cmd"><code>รันเทส tests/api.spec.ts แล้วสรุปผลเป็นตาราง: ควรได้รหัสอะไร / ได้จริงเท่าไร / ข้อกำหนดข้อไหน</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="biz1" aria-labelledby="biz1-h">
+    <h2 id="biz1-h"><span class="tag">BIZ-1</span> เลือกงานจริงของคุณ แล้วเขียนสั้น ๆ 1 หน้า</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> แบบสำหรับ brief.md (วางแล้วแก้ข้อความใน &lt; &gt; เป็นงานของคุณ)</p>
+      <div class="cmd"><code># งานที่อยากให้ช่วย: &lt;ตั้งชื่อ&gt;
+- ตอนนี้ทำยังไง: &lt;ใช้เวลากี่นาที ทำบ่อยแค่ไหน&gt;
+- ข้อมูลที่ใช้: &lt;ไฟล์อะไร มีคอลัมน์อะไร&gt;
+- อยากได้อะไรออกมา: &lt;ไฟล์อะไร ใครเปิดดู&gt;
+- วิธีคิด: &lt;สูตร การปัดเศษ&gt;
+- ระดับความลับ: &lt;เปิดเผยได้ / ภายใน / ลับ / ข้อมูลส่วนบุคคล&gt;
+- ดูยังไงว่าถูก: &lt;ตัวเลขที่รู้คำตอบอยู่แล้ว&gt;
+- รอบนี้ยังไม่ทำ: &lt;สิ่งที่ตัดออกไปก่อน&gt;</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ให้ Codex ถามก่อนทำ</p>
+      <div class="cmd"><code>อ่าน brief.md แล้วถามสิ่งที่ยังไม่ชัด ไม่เกิน 5 ข้อ ยังไม่ต้องทำโปรแกรม</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="biz2" aria-labelledby="biz2-h">
+    <h2 id="biz2-h"><span class="tag">BIZ-2</span> รวมรายงานรับวัสดุจาก 3 ไซต์</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 1</b> เซฟจุดแรกก่อนแก้</p>
+      <div class="cmd"><code>เปิดใช้ git ในโฟลเดอร์นี้ แล้ว commit จุดแรก ชื่อ ก่อนแก้</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 2</b> ดูก่อนว่าข้อมูลผิดตรงไหน</p>
+      <div class="cmd"><code>ช่วยดูทุกไฟล์ใน reports/ กับ price-list.csv ยังไม่ต้องทำโปรแกรม และห้ามแก้ไฟล์
+บอกเป็นตารางว่าข้อมูลมีปัญหาอะไรบ้าง: ปัญหา | ไฟล์ | กี่แถว | ตัวอย่าง
+ดูอย่างน้อย: แถวว่าง แถวซ้ำ วันที่เขียนหลายแบบ (พ.ศ./ค.ศ.) ชื่อไซต์สะกดไม่เหมือนกัน ตัวเลขที่ใส่เป็นข้อความหรือมีคอมมา หน่วยไม่ตรงกับ price-list.csv</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ทำโปรแกรมรวมไฟล์</p>
+      <div class="cmd"><code>เขียน merge_reports.py ที่:
+- อ่านทุกไฟล์ใน reports/ (CSV และ xlsx) ห้ามแก้หรือเขียนทับไฟล์ใน reports/
+- ทำความสะอาด: วันที่ทุกแบบเป็น YYYY-MM-DD (พ.ศ. ลบ 543), ชื่อไซต์ให้เป็นชื่อเดียวกัน,
+  ตัดแถวว่าง, ตัดแถวซ้ำตามเลขที่ใบส่งของ, ตัวเลขที่มีคอมมา,
+  หน่วยไม่ตรง price-list.csv ให้แปลงตามหมายเหตุใน price-list.csv
+- ออก output/summary.xlsx 2 ชีต: "รายการ" (ข้อมูลสะอาดแล้ว) และ "สรุป" (ไซต์ × วัสดุ: จำนวน, มูลค่า)
+- ออก output/rejected.csv (utf-8-sig) แถวที่ใช้ไม่ได้พร้อมเหตุผล
+- ท้ายการรันพิมพ์: อ่านกี่แถว ใช้กี่แถว ซ้ำกี่แถว ทิ้งกี่แถว มูลค่ารวม
+ใช้ Python มาตรฐาน + openpyxl (ติดตั้งด้วย python -m pip install openpyxl)
+อ่าน CSV ด้วย encoding utf-8-sig รันจริงแล้วแสดงผลที่พิมพ์ออกมา</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 3</b> ทำไฟล์ดับเบิลคลิก</p>
+      <div class="cmd"><code>สร้าง run.bat ไว้ข้าง merge_reports.py ข้างในเขียนตามนี้
+@echo off
+cd /d "%~dp0"
+python merge_reports.py
+pause</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>เช็กก่อนให้คนอื่นใช้</b> ไฟล์ต้นฉบับไม่ถูกแก้</p>
+      <div class="cmd"><code>ใช้ git เช็กว่ามีไฟล์ไหนใน reports/ เปลี่ยนไหม แสดงผลจริงให้ดู</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>เช็กก่อนให้คนอื่นใช้</b> ไม่มีรหัสผ่านหรือข้อมูลจริงในไฟล์</p>
+      <div class="cmd"><code>ค้นทุกไฟล์หารหัสผ่าน token อีเมล เบอร์โทร แล้วรายงาน ห้ามแก้ไฟล์</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <section class="ex" id="biz3" aria-labelledby="biz3-h">
+    <h2 id="biz3-h"><span class="tag">BIZ-3</span> หน้าเว็บคิดราคาวัสดุ</h2>
+    <div class="item">
+      <p class="when"><b>ข้อ 1</b> ในโฟลเดอร์ practice-kit\biz</p>
+      <div class="cmd"><code>อยากได้อะไร: หน้าเว็บไฟล์เดียว estimate.html สำหรับประเมินราคาวัสดุก่อนขอซื้อ ใช้ในเครื่องตัวเอง
+ใช้ข้อมูลจาก: ราคาจาก price-list.csv ฝังลงในไฟล์
+อยากได้ผลแบบไหน: เลือกวัสดุ ใส่จำนวน เพิ่ม/ลบแถว, แสดง มูลค่าสินค้า / VAT 7% / รวมทั้งสิ้น
+  ทศนิยม 2 ตำแหน่ง ปัดตามปกติ (ตำแหน่งที่ 3 ตั้งแต่ 5 ปัดขึ้น) คำนวณเป็นสตางค์เพื่อกันทศนิยมเพี้ยน
+  ปุ่ม "ดาวน์โหลด CSV" (UTF-8 BOM ให้ Excel เปิดภาษาไทยได้), จำรายการล่าสุดไว้ในเบราว์เซอร์
+หน้าตา: ภาษาไทย ตัวอักษรอย่างน้อย 16px ใช้บนมือถือได้
+ห้ามทำอะไร: ห้ามโหลดไลบรารีหรือฟอนต์จากอินเทอร์เน็ต ห้ามส่งข้อมูลออกจากเครื่อง
+ดูยังไงว่าถูก: รัน server ในเครื่องที่ http://127.0.0.1:8000 แล้วใช้ @Browser เปิด http://127.0.0.1:8000/estimate.html ใส่ MAT-001 10 ถุง + MAT-003 2 ลบ.ม. แล้วบอกตัวเลขที่หน้าจอแสดง</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> เพิ่มทีละอย่าง แล้วลองด้วย @Browser ทุกครั้ง</p>
+      <div class="cmd"><code>เพิ่มช่องชื่อไซต์และวันที่ ใส่ใน CSV ด้วย แก้เฉพาะส่วนนี้ ส่วนอื่นห้ามแตะ</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+    <div class="item">
+      <p class="when"><b>ข้อ 4</b> อีกอย่างที่ลองเพิ่มได้</p>
+      <div class="cmd"><code>จำนวนต้องเป็นจำนวนเต็ม 1 ถึง 9,999 ถ้าไม่ใช่ให้ขึ้นข้อความสีแดงใต้ช่อง และไม่นำไปคิดยอด</code><button class="copy" type="button">คัดลอก</button></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>บางข้อเขียนให้ครบกว่าบนสไลด์ เพื่อให้วางแล้วใช้ได้เลย ถ้าไม่แน่ใจว่าจะใช้ข้อความไหน ให้ถามผู้สอน</p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentNode.querySelector('code');
+      var text = code.textContent;
+      function flash(msg) {
+        btn.textContent = msg;
+        btn.classList.add('ok');
+        setTimeout(function () { btn.textContent = 'คัดลอก'; btn.classList.remove('ok'); }, 1600);
+      }
+      function fallback() {
+        var range = document.createRange();
+        range.selectNodeContents(code);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        flash('กด Ctrl+C');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash('คัดลอกแล้ว'); }, fallback);
+      } else {
+        fallback();
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  // สไลด์สอน Codex (/) และหน้าข้อความลองทำ (/prompts): เป็น static assets ล้วน ไม่มีโค้ด Worker (ไม่มี "main")
+  //   npx --yes wrangler@4.166.0 dev --port 8788   ดูในเครื่องแบบเดียวกับบนเว็บจริง (/prompts -> prompts.html)
+  //   ./deploy.sh                                   เช็กว่าไม่มีโน้ตผู้สอนหลุด แล้ว deploy
+  // ล็อกเวอร์ชัน wrangler ไว้ในคำสั่ง เพราะ repo นี้ไม่มี package.json
+  "$schema": "https://unpkg.com/wrangler@4.166.0/config-schema.json",
+  "name": "codex-course",
+  "compatibility_date": "2026-11-21",
+  // custom domain: wrangler สร้าง DNS record กับ certificate ให้ตอน deploy
+  "routes": [{ "pattern": "codex.jeerawut.com", "custom_domain": true }],
+  // เปิดได้ทางเดียวคือโดเมนข้างบน ไม่เปิด *.workers.dev และลิงก์ preview
+  "workers_dev": false,
+  "preview_urls": false,
+  // อัปโหลดเฉพาะ ./site ห้ามชี้ไปที่ root ของ repo เพราะ slides/ มีโน้ตผู้สอนที่มีเฉลย
+  "assets": { "directory": "./site" }
+}

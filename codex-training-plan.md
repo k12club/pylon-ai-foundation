@@ -2,7 +2,8 @@
 
 ไฟล์นี้คือโครงคอร์ส เนื้อหาที่ใช้สอนจริงอยู่ที่:
 - คู่มือเทคนิค (Claude Doc): https://claude.ai/artifact/PX6qKPhs8t5pogKnkE613t
-- สไลด์สอน 53 หน้า (รวมโปรแกรมที่ต้องลงและวิธีเช็ก): https://claude.ai/artifact/Ewe5rrSAWMVjmsbErwakFD
+- สไลด์สอน 53 หน้า (รวมโปรแกรมที่ต้องลงและวิธีเช็ก): https://codex.jeerawut.com
+- ข้อความลองทำทุกข้อ มีปุ่มคัดลอก: https://codex.jeerawut.com/prompts
 - ชุดฝึกแจกผู้เรียน: `practice-kit.zip` / เฉลยและสคริปต์ตรวจของผู้สอน: `trainer-kit/`
 
 อัปเดต: 21 พ.ย. 2026

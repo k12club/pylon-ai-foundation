@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>สไลด์สอน Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&amp;family=Noto+Sans+Thai:wght@400..700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<!-- Each <section> is one 1920x1080 slide, in order. Speaker notes are NOT in this repo (slides/speaker-notes.md, gitignored). -->
+<main class="deck">
+<!-- ==== เรียนแล้วได้อะไร เรียนตามลำดับไหน กฎที่ต้องจำ และโปรแกรมที่ต้องลง ==== -->
+<section id="cover" class="dark title" data-transition="fade">
+<div class="hero-back"></div>
+<div class="hero">
+<div class="hero-bar"><x-shape kind="ellipse"></x-shape><x-shape kind="ellipse"></x-shape><x-shape kind="ellipse"></x-shape></div>
+<div class="bubble"></div>
+<div class="ln" style="width:88%;--i:0"></div>
+<div class="ln" style="width:72%;--i:1"></div>
+<div class="ln" style="width:80%;--i:2"></div>
+<div class="ln" style="width:52%;--i:3"></div>
+<div class="ok-row"><x-icon name="CheckCircle"></x-icon><div class="ln"></div></div>
+<div class="cursor"></div>
+</div>
+<p class="eyebrow">คอร์สอบรมภายใน</p>
+<div class="spacer"></div>
+<h1>ใช้ <span class="hl">Codex</span> ช่วยทำงาน</h1>
+<p class="lead">สาย QA: ให้ Codex ช่วยหา bug และเขียนเทส<br>หน่วยงานอื่น: ให้ Codex ช่วยทำเครื่องมือเล็ก ๆ ไว้ใช้เอง</p>
+<div class="spacer"></div>
+<p class="cover-meta">สิ่งที่ใช้ในคอร์ส: สไลด์ · คู่มือ · ไฟล์ฝึก</p>
+</section>
+<section id="outcome" data-transition="fade">
+<div class="head">
+<p class="eyebrow">เรียนจบแล้วได้อะไร</p>
+<h2>ทุกคนได้ผลงานจริงกลับไป 1 ชิ้น</h2>
+</div>
+<div class="cards2">
+<div class="card" style="--i:0">
+<div class="card-top"><div class="chip"><x-icon name="Verified"></x-icon></div><p class="tag">สาย QA</p></div>
+<h3>ชุดเทสของระบบ 1 เรื่อง</h3>
+<p class="text">test case ที่เขียนจากข้อกำหนด<br>เทสอัตโนมัติ 5 ข้อขึ้นไป รันกี่รอบก็ได้ผลเหมือนเดิม<br>รายงาน bug ที่ dev อ่านแล้วทำตามเจอเลย</p>
+</div>
+<div class="card" style="--i:1">
+<div class="card-top"><div class="chip"><x-icon name="Tool"></x-icon></div><p class="tag">สายหน่วยงาน</p></div>
+<h3>เครื่องมือช่วยงานของตัวเอง 1 ชิ้น</h3>
+<p class="text">ตัวเลขตรงกับที่คิดเอง<br>ใส่ข้อมูลแปลก ๆ แล้วไม่พัง<br>เพื่อนเปิดวิธีใช้แล้วใช้เองได้ ไม่ต้องมาถาม</p>
+</div>
+</div>
+</section>
+<section id="weeks" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ลำดับการเรียน</p>
+<h2>เรียนตามลำดับนี้</h2>
+</div>
+<table>
+<tr class="th"><th style="width:14%">ลำดับ</th><th style="width:43%">QA</th><th style="width:43%">หน่วยงาน</th></tr>
+<tr><td>1</td><td>พื้นฐาน (เรียนด้วยกัน)</td><td>พื้นฐาน (เรียนด้วยกัน)</td></tr>
+<tr><td>2</td><td>เขียน test case · ลองเล่นหา bug</td><td>เลือกงานที่จะทำ · รวมไฟล์ Excel</td></tr>
+<tr><td>3</td><td>เทสหน้าเว็บอัตโนมัติ · เทส API</td><td>ทำหน้าเว็บเครื่องมือ · ลองข้อมูลแปลก ๆ</td></tr>
+<tr><td>4</td><td>รันเทสทั้งชุด</td><td>เขียนวิธีใช้ แล้วแชร์</td></tr>
+<tr><td>5</td><td>โชว์ผลงาน</td><td>โชว์ผลงาน</td></tr>
+</table>
+</section>
+<section id="rules" class="accent" data-transition="fade">
+<div class="head">
+<p class="eyebrow">จำไว้ตลอดคอร์ส</p>
+<h2>กฎ 3 ข้อ</h2>
+</div>
+<div class="rules" style="grid-template-columns:1fr 1fr 1fr">
+<div class="rule fragment"><p class="num">1</p><div class="body"><h3>เลือก Ask for approval</h3><p class="text">Codex จะถามก่อนทำอะไรเสี่ยง ห้ามเลือก Full access</p></div></div>
+<div class="rule fragment"><p class="num">2</p><div class="body"><h3>ห้ามใส่ข้อมูลลับ</h3><p class="text">รหัสผ่าน ข้อมูลลูกค้า ข้อมูลส่วนตัวของใคร ห้ามพิมพ์ลงไป</p></div></div>
+<div class="rule fragment"><p class="num">3</p><div class="body"><h3>เปิดแค่โฟลเดอร์งาน</h3><p class="text">ห้ามเปิดทั้ง Desktop หรือไดรฟ์แชร์ให้ Codex</p></div></div>
+</div>
+</section>
+<section id="install" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ก่อนเริ่มเรียน</p>
+<h2>โปรแกรมที่ทุกคนต้องลง</h2>
+</div>
+<table>
+<tr class="th"><th style="width:24%">โปรแกรม</th><th style="width:36%">เอาไว้ทำอะไร</th><th style="width:40%">ลงยังไง</th></tr>
+<tr><td>แอป ChatGPT (มี Codex ในตัว)</td><td>ตัวหลักที่ใช้ทั้งคอร์ส</td><td>Microsoft Store ค้นหา ChatGPT แล้วเข้าสู่ระบบด้วยอีเมลบริษัท</td></tr>
+<tr><td>Git</td><td>ให้ Codex เซฟจุด และย้อนกลับได้</td><td>git-scm.com/download/win แล้วกด Next จนจบ</td></tr>
+<tr><td>Python</td><td>รันโปรแกรมจัดการ Excel ที่ Codex เขียนให้</td><td>python.org ติ๊ก Add python.exe to PATH ก่อนกด Install</td></tr>
+<tr><td>Node.js (รุ่น LTS)</td><td>เปิดระบบตัวอย่าง และรันเทส</td><td>nodejs.org แล้วกด Next จนจบ</td></tr>
+<tr><td>VS Code</td><td>เปิดอ่านและแก้ไฟล์ที่ Codex ทำให้</td><td>code.visualstudio.com</td></tr>
+</table>
+<p class="lead">ลงให้ครบทุกตัว ไม่ต้องลง WSL หรือ Docker ถ้าเครื่องขอรหัส admin ให้แจ้ง IT</p>
+</section>
+<section id="install-check" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ลงเสร็จแล้ว</p>
+<h2>เช็กว่าลงครบหรือยัง</h2>
+</div>
+<p class="lead" style="--d:0">กดปุ่ม Start พิมพ์ PowerShell แล้วกด Enter จากนั้นพิมพ์ทีละบรรทัด แล้วกด Enter</p>
+<table>
+<tr class="th"><th style="width:26%">โปรแกรม</th><th style="width:30%">พิมพ์</th><th style="width:44%">ถ้าลงแล้ว จะขึ้นประมาณนี้</th></tr>
+<tr><td>Git</td><td class="mono">git --version</td><td class="mono">git version 2.xx.x.windows.1</td></tr>
+<tr><td>Python</td><td class="mono">python --version</td><td class="mono">Python 3.xx.x</td></tr>
+<tr><td>Node.js</td><td class="mono">node -v</td><td>เลขรุ่นที่ขึ้นต้นด้วย v เช่น <span class="mono">v24.x.x</span></td></tr>
+<tr><td>VS Code</td><td class="mono">code --version</td><td>บรรทัดแรกเป็นเลขรุ่น เช่น <span class="mono">1.xx.x</span></td></tr>
+<tr><td>แอป ChatGPT</td><td>เปิดจากเมนู Start</td><td>เปลี่ยนเป็น Codex ที่หัวแถบซ้ายได้</td></tr>
+</table>
+<p class="lead">ขึ้นว่า is not recognized: ปิด PowerShell เปิดใหม่ ยังไม่ได้ให้รีสตาร์ตเครื่อง</p>
+</section>
+<section id="ws-setup" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ 0</p>
+<h2>เตรียมไฟล์ฝึก แล้วทักทาย Codex</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>เปิด File Explorer พิมพ์ %USERPROFILE% ในช่องที่อยู่ด้านบน กด Enter แล้วสร้างโฟลเดอร์ใหม่ชื่อ codex-practice</li>
+<li>คลิกขวาที่ไฟล์ practice-kit.zip เลือก Extract All กด Browse เลือกโฟลเดอร์ codex-practice แล้วกด Extract</li>
+<li>เปิดแอป ChatGPT เปลี่ยนเป็น Codex กด Ctrl+O (Open Folder) เลือกโฟลเดอร์ codex-practice แล้วกด Trust folder</li>
+<li>เลือก Ask for approval ใต้ช่องพิมพ์ แล้ววางข้อความทางขวา กดส่ง</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>ช่วยดูในโฟลเดอร์ practice-kit หน่อย ว่ามีโฟลเดอร์อะไรบ้าง แต่ละอันเอาไว้ทำอะไร ยังไม่ต้องแก้ไฟล์นะ</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> Codex บอกได้ว่ามีโฟลเดอร์ common, qa, biz และไม่ได้ไปแก้ไฟล์อะไร</p></div>
+</section>
+<section id="shot0-1" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 1/6</p>
+<h2>เลือก Codex ที่หัวแถบซ้าย</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-1.png" alt="เมนูหัวแถบซ้ายมี ChatGPT กับ Codex เลือก Codex" style="width:878px;height:463px"></div>
+<p class="shot-note">กดชื่อที่หัวแถบซ้าย แล้วเลือก <b>Codex</b> (Build, debug, and ship) จะมีเครื่องหมายถูกขึ้นหลังชื่อ</p>
+</div>
+</section>
+<section id="shot0-2" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 2/6</p>
+<h2>กด Ctrl+O แล้วเลือกโฟลเดอร์</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-2.png" alt="เมนู File มีคำสั่ง Open Folder" style="width:900px;height:389px"></div>
+<p class="shot-note">ภาพจาก Mac จึงเห็น ⌘O บน Windows กด <b>Ctrl+O</b> (ปุ่มในแอปอาจเขียนว่า Open Folder หรือ Add new project) แล้วเลือกโฟลเดอร์ <b>codex-practice</b></p>
+</div>
+</section>
+<section id="shot0-3" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 3/6</p>
+<h2>กด Trust folder</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-3.png" alt="หน้าต่างถามว่าไว้ใจโฟลเดอร์นี้ไหม มีปุ่ม Trust folder" style="width:835px;height:600px"></div>
+<p class="shot-note">Codex ถามก่อนว่าไว้ใจโฟลเดอร์นี้ไหม เป็นโฟลเดอร์ฝึกของเราเอง กด <b>Trust folder</b> ได้เลย ถ้าเป็นโฟลเดอร์ที่ได้มาจากคนอื่น ให้ถามผู้สอนก่อน</p>
+</div>
+</section>
+<section id="shot0-4" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 4/6</p>
+<h2>โฟลเดอร์ขึ้นเป็น project ในแถบซ้าย</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-4.png" alt="แถบซ้ายมี project ชื่อ codex-practice" style="width:900px;height:302px"></div>
+<p class="shot-note">ใต้คำว่า Projects จะมี <b>codex-practice</b> แชตที่เริ่มตอนนี้จะทำงานในโฟลเดอร์นี้ ส่วนเหนือช่องพิมพ์ก็จะขึ้นชื่อโฟลเดอร์เดียวกัน</p>
+</div>
+</section>
+<section id="shot0-5" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 5/6</p>
+<h2>เลือก Ask for approval</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-5.png" alt="เมนูสิทธิ์ใต้ช่องพิมพ์ มี Ask for approval, Approve for me และ Full access" style="width:1500px;height:424px"></div>
+<p class="shot-note">กดปุ่มใต้ช่องพิมพ์ เลือกบรรทัดแรก <b>Ask for approval</b> ห้ามเลือก Full access ที่เป็นตัวสีแดง</p>
+</div>
+</section>
+<section id="shot0-6" class="ws shot side" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ 0 · ภาพ 6/6</p>
+<h2>วางข้อความ กดส่ง แล้วอ่านคำตอบ</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot0-6.png" alt="Codex ตอบว่า practice-kit มีโฟลเดอร์ common, qa, biz และไม่ได้แก้ไฟล์" style="width:981px;height:600px"></div>
+<p class="shot-note">คำตอบต้องบอกโฟลเดอร์ common, qa, biz และบอกว่า<b>ไม่ได้แก้ไฟล์</b> ถ้าคำตอบตรงแบบนี้ ถือว่าผ่านลองทำ 0</p>
+</div>
+</section>
+<!-- ==== พื้นฐานที่ทุกคนใช้: สั่งงาน เซฟงาน ตั้งกฎ และใช้ของที่ทีมทำไว้ ==== -->
+<section id="modes" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ในแอป ChatGPT มี 2 แบบ</p>
+<h2>เลือกให้ตรงกับงาน</h2>
+</div>
+<div class="cards2">
+<div class="card" style="--i:0">
+<div class="card-top"><div class="chip"><x-icon name="Chat"></x-icon></div><p class="tag">ChatGPT</p></div>
+<h3>ถาม-ตอบ ทำเอกสารครั้งเดียว</h3>
+<p class="text">ถามเรื่องที่สงสัย ร่างข้อความ สรุปเอกสาร ทำตาราง ทำสไลด์ ที่ทำเสร็จแล้วก็จบ</p>
+</div>
+<div class="card" style="--i:1">
+<div class="card-top"><div class="chip"><x-icon name="Code"></x-icon></div><p class="tag">Codex</p></div>
+<h3>ทำงานกับไฟล์ในเครื่อง</h3>
+<p class="text">ให้ช่วยจัดการไฟล์ ทำโปรแกรมเล็ก ๆ ที่ใช้ซ้ำได้ทุกสัปดาห์</p>
+</div>
+</div>
+<p class="lead">สลับได้ที่ชื่อหัวแถบซ้ายของแอป คอร์สนี้ใช้ Codex เป็นหลัก ของที่ทำไว้ใช้ซ้ำได้ จะช่วยประหยัดเวลาไปได้เรื่อย ๆ</p>
+</section>
+<section id="prompt" data-transition="fade">
+<div class="head">
+<p class="eyebrow">วิธีสั่งงาน</p>
+<h2>บอกให้ครบ 5 อย่าง Codex จะเดาน้อยลง</h2>
+</div>
+<div class="cards2">
+<p class="code" style="animation-delay:150ms">อยากได้อะไร: ทำอะไร ให้ใครใช้<br>ใช้ข้อมูลจาก: ไฟล์ไหน<br>ห้ามทำอะไร: เช่น ห้ามแก้ไฟล์เดิม ห้ามเดา<br>อยากได้ผลแบบไหน: ชื่อไฟล์ หน้าตา คอลัมน์<br>ดูยังไงว่าถูก: ตัวเลขไหนต้องตรง</p>
+<div class="checks">
+<div class="check" style="--i:1"><x-icon name="Lightbulb"></x-icon><p class="text">บอกแผนก่อน ยังไม่ต้องแก้ไฟล์</p></div>
+<div class="check" style="--i:2"><x-icon name="Warning"></x-icon><p class="text">ไม่แน่ใจตรงไหน ถามก่อน อย่าเดา</p></div>
+<div class="check" style="--i:3"><x-icon name="CheckCircle"></x-icon><p class="text">ลองทำจริงก่อน แล้วค่อยบอกว่าเสร็จ</p></div>
+</div>
+</div>
+</section>
+<section id="ws-prompt" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1</p>
+<h2>สรุปบันทึกประชุม 2 แบบ แล้วเทียบกัน</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>กด Ctrl+O (Open Folder) เลือกโฟลเดอร์ practice-kit\common\session1 แล้วกด Trust folder จะได้ project ใหม่ในแถบซ้าย</li>
+<li>ลองสั่งสั้น ๆ ก่อน: สรุป @meeting-note.txt ให้หน่อย</li>
+<li>พิมพ์ /new เพื่อเริ่มแชตใหม่ แล้วสั่งแบบบอกครบ 5 อย่างตามทางขวา</li>
+<li>เทียบกัน: แบบไหนมีชื่อคนหรือวันที่ ที่ในบันทึกไม่มี</li>
+</ol>
+<p class="code">อยากได้อะไร: สรุปประชุมให้หัวหน้าที่ไม่ได้เข้า อ่านจบใน 1 นาที<br>ใช้ข้อมูลจาก: @meeting-note.txt<br>ห้ามทำอะไร: ห้ามเติมชื่อ วันที่ ตัวเลข ที่บันทึกไม่ได้เขียนไว้ ถ้าไม่มีให้เขียนว่า "ไม่ระบุ"<br>อยากได้ผลแบบไหน: 3 หัวข้อ เรื่องที่ตกลงแล้ว / งานที่ต้องทำ (ใครทำ เสร็จวันไหน) / เรื่องที่ยังค้าง<br>ดูยังไงว่าถูก: ทุกงานมีชื่อคนกับวันที่จากบันทึก หรือเขียนว่า "ไม่ระบุ"</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> ทุกเรื่องและทุกงานในผลลัพธ์หาเจอในบันทึก และบอกได้ว่าแบบสั้นแต่งอะไรเอง หรือขาดอะไรไป (เช่น ไม่บอกว่าช่องไหนไม่ระบุ)</p></div>
+</section>
+<section id="shot1-1" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 1/7</p>
+<h2>กด Ctrl+O เลือกโฟลเดอร์ session1</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-1.png" alt="แถบซ้ายมี project session1 อยู่บน codex-practice" style="width:900px;height:525px"></div>
+<p class="shot-note">เลือก <b>practice-kit\common\session1</b> แล้วกด Trust folder จะได้ project ใหม่ชื่อ session1 ส่วน codex-practice ยังอยู่ กดสลับไปมาได้</p>
+</div>
+</section>
+<section id="shot1-2" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 2/7</p>
+<h2>พิมพ์ @ แล้วเลือกไฟล์</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-2.png" alt="รายการหลังพิมพ์ @meeting มีไฟล์ meeting-note.txt และแชตเก่า 2 อัน" style="width:1500px;height:424px"></div>
+<p class="shot-note">พิมพ์ <b>สรุป @meeting</b> แล้วเลือกบรรทัดที่มี<b>ไอคอนกระดาษ</b> บรรทัดที่เป็นรูปฟองแชตคือแชตเก่า ไม่ใช่ไฟล์</p>
+</div>
+</section>
+<section id="shot1-3" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 3/7</p>
+<h2>ชื่อไฟล์กลายเป็นป้ายสีฟ้า แล้วกดส่ง</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-3.png" alt="ช่องพิมพ์มีข้อความ สรุป meeting-note.txt ให้หน่อย โดยชื่อไฟล์เป็นป้ายสีฟ้า" style="width:1500px;height:305px"></div>
+<p class="shot-note">ป้ายสีฟ้าที่มีไอคอนกระดาษแปลว่า Codex จะอ่านไฟล์นี้ พิมพ์ต่อว่า <b>ให้หน่อย</b> แล้วกด Enter</p>
+</div>
+</section>
+<section id="shot1-4" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 4/7</p>
+<h2>อ่านผลแบบสั่งสั้น</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-4.png" alt="ผลสรุปแบบสั่งสั้น มีประเด็นและตารางงานที่ต้องติดตาม" style="width:959px;height:600px"></div>
+<p class="shot-note">จดไว้ว่ามีชื่อคน วันที่ หรือตัวเลขตรงไหนบ้าง เดี๋ยวเอาไปเทียบกับแบบบอกครบ 5 อย่าง</p>
+</div>
+</section>
+<section id="shot1-5" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 5/7</p>
+<h2>พิมพ์ /new แล้วกด Enter</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-5.png" alt="พิมพ์ /new แล้วมีเมนู New chat Start a blank chat in the same workspace" style="width:1500px;height:293px"></div>
+<p class="shot-note">ได้แชตเปล่าใน project เดิม Codex จะไม่เห็นคำตอบรอบแรก เทียบ 2 แบบได้ยุติธรรม</p>
+</div>
+</section>
+<section id="shot1-6" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 6/7</p>
+<h2>พิมพ์คำสั่งแบบบอกครบ 5 อย่าง</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-6.png" alt="ช่องพิมพ์มีคำสั่ง 5 บรรทัด และป้ายไฟล์ meeting-note.txt" style="width:1500px;height:415px"></div>
+<p class="shot-note">ขึ้นบรรทัดใหม่ด้วย <b>Shift+Enter</b> (กด Enter อย่างเดียวจะส่งทันที) ใส่ไฟล์ด้วย @ เหมือนภาพ 2/7</p>
+</div>
+</section>
+<section id="shot1-7" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 1 · ภาพ 7/7</p>
+<h2>เทียบผล: ดูช่องที่เขียนว่า ไม่ระบุ</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shot1-7.png" alt="ผลแบบบอกครบ 5 อย่าง แบ่ง 3 หัวข้อ และเขียนว่า ไม่ระบุ ในช่องที่บันทึกไม่ได้บอก" style="width:816px;height:600px"></div>
+<p class="shot-note">ช่องไหนบันทึกไม่ได้บอก Codex ต้องเขียนว่า <b>ไม่ระบุ</b><br>จากนั้นย้อนไปดูภาพ 4/7 (ผลแบบสั่งสั้น) ว่าแบบสั่งสั้นเติมอะไรขึ้นมาเองหรือเปล่า</p>
+</div>
+</section>
+<section id="loop" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ทำงานกับ Codex ทุกครั้ง</p>
+<h2>เซฟก่อนสั่ง ตรวจก่อนเชื่อ</h2>
+</div>
+<div class="flow">
+<div class="step"><p class="n">1</p><h3>เซฟจุด</h3><p class="text">เก็บงานไว้ ก่อนเริ่ม</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="1"></x-shape>
+<div class="step fragment" data-fragment-index="1"><p class="n">2</p><h3>สั่งงาน</h3><p class="text">ให้บอกแผนก่อน แล้วค่อยทำ</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="2"></x-shape>
+<div class="step fragment" data-fragment-index="2"><p class="n">3</p><h3>ดูว่าแก้อะไร</h3><p class="text">ให้ Codex สรุป ว่าเปลี่ยนไฟล์ไหน</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="3"></x-shape>
+<div class="step key fragment" data-fragment-index="3"><p class="n">4</p><h3>ตรวจผล</h3><p class="text">ลองใช้จริง เทียบตัวเลข กับที่คิดเอง</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="4"></x-shape>
+<div class="step fragment" data-fragment-index="4"><p class="n">5</p><h3>เก็บหรือย้อน</h3><p class="text">ถูกก็เซฟ ผิดก็ย้อน กลับจุดเดิม</p></div>
+</div>
+<p class="lead">ผิด 2 รอบติด อย่าสั่งแก้ต่อในแชตเดิม เริ่มแชตใหม่ด้วย /new แล้วบอกให้ชัดขึ้น</p>
+</section>
+<section id="git" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ปุ่มย้อนกลับของงาน</p>
+<h2>ไม่ต้องจำคำสั่ง บอก Codex ได้เลย</h2>
+</div>
+<table>
+<tr class="th"><th style="width:32%">อยากทำ</th><th style="width:68%">พิมพ์บอก Codex</th></tr>
+<tr><td>เริ่มใช้กับโฟลเดอร์ใหม่</td><td>เปิดใช้ git ในโฟลเดอร์นี้ แล้ว commit จุดแรกให้หน่อย</td></tr>
+<tr><td>เซฟจุด</td><td>commit งานตอนนี้ไว้ ตั้งชื่อว่า ก่อนแก้รายงาน</td></tr>
+<tr><td>ดูว่าแก้อะไรไปบ้าง</td><td>ใช้ git เช็กให้ดูหน่อย ว่าแก้ไฟล์ไหนไปบ้าง แก้อะไร</td></tr>
+<tr><td>ย้อนกลับ</td><td>ย้อนทุกไฟล์กลับไปจุดที่ commit ล่าสุด</td></tr>
+<tr><td>ดูจุดที่เคยเซฟ</td><td>แสดงประวัติ commit ทั้งหมด</td></tr>
+</table>
+<p class="lead">เซฟก่อนสั่งงานทุกครั้ง พังเมื่อไหร่ก็ย้อนกลับได้</p>
+</section>
+<section id="ws-git" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 2</p>
+<h2>ให้ Codex รวม 3 ไฟล์ แล้วลองย้อนกลับ</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>กด Ctrl+O เลือกโฟลเดอร์ practice-kit\common\session2</li>
+<li>พิมพ์: เปิดใช้ git ในโฟลเดอร์นี้ แล้ว commit จุดแรก ชื่อ ก่อนแก้</li>
+<li>ส่งข้อความทางขวา แล้วสั่ง: ใช้ git เช็กว่าแก้ไฟล์ไหนไปบ้าง</li>
+<li>คิดยอดสาขาเหนือเอง ถ้าตรงสั่ง commit ถ้าไม่ตรงสั่ง: ย้อนกลับไปจุดล่าสุด</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>รวมไฟล์ sales-north.csv sales-central.csv sales-south.csv เป็นไฟล์ summary.csv สรุปยอดตามสาขา และตามกลุ่มสินค้า ใช้ PowerShell เท่านั้น บันทึกให้ Excel เปิดภาษาไทยได้ ห้ามแก้ไฟล์เดิม แล้วบอกยอดรวมทั้งหมด</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> ยอดรวมตรงกับที่ผู้สอนเฉลย และ Codex บอกได้ว่ามีจุดเซฟ 2 จุด</p></div>
+</section>
+<section id="shotg-1" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 2 · ภาพ 1/3</p>
+<h2>Codex ขออนุญาตก่อนรันคำสั่ง</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotg-1.png" alt="หน้าต่างขออนุญาตรันคำสั่ง git ในโฟลเดอร์ session2 มีปุ่ม Deny และ Allow once" style="width:1500px;height:369px"></div>
+<p class="shot-note">อ่านคำสั่งในกรอบก่อนว่าจะทำอะไร ถ้าเป็นงานในโฟลเดอร์ฝึกตามที่สั่ง กด <b>Allow once</b> ถ้าไม่แน่ใจกด Deny</p>
+</div>
+</section>
+<section id="shotg-2" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 2 · ภาพ 2/3</p>
+<h2>เซฟจุดแรกแล้ว</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotg-2.png" alt="Codex ตอบว่าเปิดใช้ Git และสร้าง commit แรกชื่อ ก่อนแก้ พร้อมเลข commit" style="width:1500px;height:255px"></div>
+<p class="shot-note">Codex บอกเลข commit กับชื่อจุดเซฟ <b>ก่อนแก้</b> แปลว่าเซฟจุดแรกเรียบร้อย พังเมื่อไหร่ย้อนกลับมาจุดนี้ได้</p>
+</div>
+</section>
+<section id="shotg-3" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 2 · ภาพ 3/3</p>
+<h2>รวมไฟล์ แล้วเช็กด้วย git</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotg-3.png" alt="Codex รวมไฟล์เป็น summary.csv และบอกยอดรวม (บังตัวเลขไว้) แล้ว git บอกว่ามีไฟล์ใหม่ 1 ไฟล์" style="width:912px;height:600px"></div>
+<p class="shot-note">ยอดรวมต้องตรงกับเฉลย และ git ต้องบอกว่ามีไฟล์ใหม่ <b>summary.csv</b> ส่วนไฟล์เดิม 3 ไฟล์ไม่ถูกแก้</p>
+</div>
+</section>
+<section id="config" data-transition="fade">
+<div class="head">
+<p class="eyebrow">เขียนครั้งเดียว ใช้ได้ตลอด</p>
+<h2>AGENTS.md เก็บกฎ ส่วน skill เก็บคำสั่งที่ใช้บ่อย</h2>
+</div>
+<div class="cards2">
+<div class="card" style="--i:0">
+<div class="card-top"><div class="chip"><x-icon name="Settings"></x-icon></div><p class="tag">AGENTS.md</p></div>
+<h3>กฎที่ Codex อ่านทุกครั้ง</h3>
+<p class="text">เช่น ตอบเป็นภาษาไทย ห้ามลบไฟล์<br>วางไฟล์ไว้ในโฟลเดอร์งาน Codex จะอ่านเอง<br>แก้กฎแล้ว เริ่มแชตใหม่ด้วย /new</p>
+</div>
+<div class="card" style="--i:1">
+<div class="card-top"><div class="chip"><x-icon name="Lightning"></x-icon></div><p class="tag">Skill</p></div>
+<h3>คำสั่งที่ใช้บ่อย เก็บไว้เรียกใช้</h3>
+<p class="text">ให้ $skill-creator ช่วยสร้าง<br>เรียกใช้ด้วย $ ตามด้วยชื่อ<br>อะไรที่สั่งซ้ำเกิน 3 ครั้ง ทำเป็น skill ได้เลย</p>
+</div>
+</div>
+</section>
+<section id="ws-config" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 3</p>
+<h2>ตั้งกฎให้ Codex แล้วทำ skill แรก</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>วางเมาส์ที่ project codex-practice ในแถบซ้าย กดรูปดินสอ แล้วส่งข้อความทางขวา</li>
+<li>พิมพ์ /new แล้วถาม: ตอนนี้คุณอ่านกฎจากไฟล์ AGENTS.md ไหนอยู่</li>
+<li>พิมพ์ $skill-creator แล้วบอกว่าอยากได้ skill ชื่อ meeting-summary ที่สรุปประชุมแบบลองทำ 1</li>
+<li>พิมพ์ /new แล้วสั่ง $meeting-summary กับไฟล์ practice-kit\common\session1\meeting-note.txt</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>สร้างไฟล์ AGENTS.md ในโฟลเดอร์นี้ ใส่กฎตามนี้<br># กฎ<br>- ตอบเป็นภาษาไทย<br>- ก่อนแก้ไฟล์ บอกแผนสั้น ๆ ก่อน<br>- ห้ามลบไฟล์ ถ้าจำเป็นต้องถามก่อน<br>- ห้ามใส่รหัสผ่านลงในไฟล์</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> Codex บอกชื่อไฟล์ AGENTS.md ได้ และ $meeting-summary สรุปได้เหมือนลองทำ 1 โดยไม่ต้องพิมพ์ยาว</p></div>
+</section>
+<section id="shotc-1" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 3 · ภาพ 1/4</p>
+<h2>เริ่มแชตใหม่ใน project codex-practice</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotc-1.png" alt="แถบซ้ายมี project session2, session1 และ codex-practice ที่ข้างชื่อมีรูปดินสอ" style="width:692px;height:568px"></div>
+<p class="shot-note">เอาเมาส์ไปวางที่ชื่อ project จะมี<b>รูปดินสอ</b>ขึ้นมา กดรูปดินสอเพื่อเริ่มแชตใหม่ใน project นั้น</p>
+</div>
+</section>
+<section id="shotc-2" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 3 · ภาพ 2/4</p>
+<h2>พิมพ์ $ แล้วเลือก Skill Creator</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotc-2.png" alt="พิมพ์ $skill แล้วมีรายการ Skill Creator กับ Skill Installer" style="width:1500px;height:328px"></div>
+<p class="shot-note">พิมพ์ <b>$skill</b> แล้วเลือก Skill Creator จากนั้นเล่าต่อว่าอยากได้ skill ชื่ออะไร ทำอะไร</p>
+</div>
+</section>
+<section id="shotc-3" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 3 · ภาพ 3/4</p>
+<h2>Codex ขออนุญาตติดตั้ง skill</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotc-3.png" alt="หน้าต่างขออนุญาตคัดลอก skill meeting-summary ไปไว้ในโฟลเดอร์ skills ของ Codex" style="width:1500px;height:333px"></div>
+<p class="shot-note">Skill Creator เก็บ skill ไว้ในโฟลเดอร์ส่วนตัวของเรา ซึ่งอยู่นอกโฟลเดอร์งาน Codex จึงถามก่อน อ่านว่าเป็นชื่อ skill ที่เราสั่ง แล้วกด <b>Allow once</b></p>
+</div>
+</section>
+<section id="shotc-4" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ 3 · ภาพ 4/4</p>
+<h2>เรียก $meeting-summary ได้ผลแบบเดิม</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotc-4.png" alt="สั่ง Meeting Summary กับ meeting-note.txt ได้ผล 3 หัวข้อและเขียนว่า ไม่ระบุ" style="width:691px;height:600px"></div>
+<p class="shot-note">พิมพ์ /new แล้ว <b>$meeting</b> เลือก Meeting Summary ใส่ไฟล์ด้วย @meeting-note ได้ผล 3 หัวข้อโดยไม่ต้องพิมพ์ยาว</p>
+</div>
+</section>
+<section id="extend" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ใช้ของที่คนอื่นทำไว้</p>
+<h2>ติดตั้ง skill ของทีม และต่อ Codex กับโปรแกรมอื่น</h2>
+</div>
+<div class="cards2">
+<div class="card" style="--i:0">
+<div class="card-top"><div class="chip"><x-icon name="Users"></x-icon></div><p class="tag">skill ของทีม</p></div>
+<h3>ติดตั้งแค่คัดลอกโฟลเดอร์</h3>
+<p class="text">วางโฟลเดอร์ skill ไว้ใน %USERPROFILE%\.agents\skills<br>ถ้า skill อยู่ในโฟลเดอร์งานของทีมอยู่แล้ว เปิดแล้วใช้ได้เลย<br>เปิดอ่าน SKILL.md ก่อนติดตั้งทุกครั้ง</p>
+</div>
+<div class="card" style="--i:1">
+<div class="card-top"><div class="chip"><x-icon name="Link"></x-icon></div><p class="tag">MCP</p></div>
+<h3>ตัวเชื่อม Codex กับโปรแกรมอื่น</h3>
+<p class="text">เช่น ให้ Codex คุมเบราว์เซอร์ หรือดึงงานจากระบบแจ้งปัญหา<br>เพิ่มได้ที่ Settings &gt; MCP servers &gt; Add server<br>ติดตั้งเฉพาะตัวที่ IT อนุญาต</p>
+</div>
+</div>
+<p class="lead">อยากรู้ว่าต่ออะไรไว้บ้าง พิมพ์ /mcp</p>
+</section>
+<section id="ws-ext" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ 4</p>
+<h2>ติดตั้ง skill ของทีม และต่อ MCP ตัวแรก</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>ใน File Explorer เปิด practice-kit\common\team-skills คลิกขวาโฟลเดอร์ data-check แล้วเลือก Copy</li>
+<li>พิมพ์ %USERPROFILE% ในช่องที่อยู่ด้านบน กด Enter เข้าโฟลเดอร์ .agents แล้ว skills (ถ้าไม่มีให้สร้าง) แล้ว Paste</li>
+<li>ปิดแอป ChatGPT แล้วเปิดใหม่ สั่ง $data-check กับไฟล์ใน practice-kit\biz\reports</li>
+<li>สาย QA: ไปที่ Settings &gt; MCP servers &gt; Add server ใส่ค่าทางขวา กด Save แล้ว Restart จากนั้นพิมพ์ /mcp</li>
+</ol>
+<p class="code"><span class="label" data-copy="off">ค่าที่ใส่ใน Add server (สาย QA)</span><br>ชื่อ: playwright<br>ชนิด: STDIO<br>คำสั่ง: npx @playwright/mcp@latest<br><br><span class="label">พิมพ์ให้ Codex</span><br>ใช้ MCP playwright เปิด http://127.0.0.1:3100 แล้วบอกว่าหน้าเข้าสู่ระบบมีปุ่มอะไรบ้าง อย่ากดอะไร</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> $data-check ตอบเป็นตารางปัญหาของข้อมูล และสาย QA เห็น playwright ใน /mcp</p></div>
+</section>
+<!-- ==== สาย QA: จากข้อกำหนดจนได้เทสทั้งชุด ==== -->
+<section id="qa-rule" class="dark" data-transition="fade">
+<p class="eyebrow">สาย QA</p>
+<div class="spacer"></div>
+<div class="chip big"><x-icon name="Warning"></x-icon></div>
+<p class="statement">เทสไม่ผ่านเพราะระบบผิด<br><span class="hot">อย่าแก้เทสให้ผ่าน</span></p>
+<p class="lead">Codex ชอบแก้ค่าที่คาดไว้ให้ตรงกับระบบ เทสก็จะผ่าน แต่ bug หลุดไป ให้ปล่อยไว้ แล้วรายงานว่าไม่ตรงข้อกำหนดข้อไหน</p>
+<div class="spacer"></div>
+</section>
+<section id="qa-flow" data-transition="fade">
+<div class="head">
+<p class="eyebrow">สาย QA ทีละขั้น</p>
+<h2>จากข้อกำหนด จนได้เทสทั้งชุด</h2>
+</div>
+<div class="flow">
+<div class="step"><p class="n">QA-1</p><h3>test case</h3><p class="text">เขียนจาก ข้อกำหนด ทุกข้อ</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="1"></x-shape>
+<div class="step fragment" data-fragment-index="1"><p class="n">QA-2</p><h3>ลองเล่น หา bug</h3><p class="text">ให้ Codex ลองกด แล้วเขียนรายงาน</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="2"></x-shape>
+<div class="step key fragment" data-fragment-index="2"><p class="n">QA-3</p><h3>เทสหน้าเว็บ</h3><p class="text">เขียนครั้งเดียว รันได้ทุกวัน</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="3"></x-shape>
+<div class="step fragment" data-fragment-index="3"><p class="n">QA-4</p><h3>เทส API</h3><p class="text">เช็กว่าระบบ ตอบถูก ทุกกรณี</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="4"></x-shape>
+<div class="step fragment" data-fragment-index="4"><p class="n">QA-5</p><h3>รันทั้งชุด</h3><p class="text">สรุปว่าอะไรผ่าน อะไรไม่ผ่าน</p></div>
+</div>
+<p class="lead">ฝึกกับระบบเบิกวัสดุตัวอย่าง (ดับเบิลคลิก start.bat) มีข้อกำหนด 17 ข้อ และมีจุดที่ทำงานผิดซ่อนอยู่</p>
+</section>
+<section id="ws-qa1" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ QA-1</p>
+<h2>เขียน test case จากข้อกำหนด</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>กด Ctrl+O เลือกโฟลเดอร์ practice-kit\qa แล้วสั่ง commit จุดแรกไว้ก่อน</li>
+<li>ส่งข้อความทางขวา</li>
+<li>เปิด testcases.csv ใน Excel สุ่มมา 5 ข้อ เทียบกับข้อกำหนดทีละบรรทัด</li>
+<li>พิมพ์ /new แล้วให้ Codex ช่วยตรวจแบบหัวหน้า QA (ข้อความอยู่ในคู่มือ QA-1)</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>ช่วยเขียน test case จาก requirements\requirements.md ข้อ REQ-04 ถึง REQ-09 บันทึกเป็น testcases.csv ให้ Excel เปิดภาษาไทยได้ มีคอลัมน์ TC-ID, REQ-ID, ขั้นตอน, ผลที่ควรได้, ประเภท<br>ข้อกำหนดทุกข้อต้องมีกรณีปกติและกรณีผิด ค่าที่มีขอบเขต ให้ลองค่าต่ำสุด สูงสุด และเลยขอบไป 1<br>ข้อกำหนดไม่ได้บอกตรงไหน จดคำถามไว้ใน questions.md อย่าเดา</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> ข้อกำหนดทุกข้อมีกรณีปกติและกรณีผิด และชี้ได้ 1 ข้อที่ Codex เขียนเกินกว่าข้อกำหนดบอก</p></div>
+</section>
+<section id="ws-qa2" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ QA-2</p>
+<h2>ลองเล่นหา bug ด้วย @Browser</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>ใน File Explorer เปิด practice-kit\qa\app ดับเบิลคลิก start.bat จะมีหน้าต่างสีดำขึ้นมา เปิดทิ้งไว้</li>
+<li>วางเมาส์ที่ project qa ในแถบซ้าย กดรูปดินสอ แล้วส่งภารกิจทางขวา</li>
+<li>ลองทำตามที่ Codex เจอด้วยมือตัวเอง 1 รอบ</li>
+<li>เขียนรายงาน bug ตามแบบในคู่มือ QA-2 หรือใช้ $bug-report</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>ใช้ @Browser ลองระบบที่ http://127.0.0.1:3100 (ชื่อผู้ใช้กับรหัสอยู่ใน README.md ในโฟลเดอร์นี้)<br>ภารกิจ: หา bug ตอนค้นหาและกรองรายการ ตามข้อ REQ-11 ถึง REQ-14<br>ลองพิมพ์ภาษาไทย ลองวันแรกกับวันสุดท้ายของช่วง ลองเว้นว่าง<br>เจออะไรแปลก จดขั้นตอนและแคปหน้าจอไว้ใน findings.md ห้ามกดอนุมัติหรือไม่อนุมัติ ห้ามเดาสาเหตุในโค้ด</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> มีรายงาน bug อย่างน้อย 1 ใบ ที่เพื่อนข้าง ๆ อ่านแล้วทำตามเจอเหมือนกัน</p></div>
+</section>
+<section id="playwright" data-transition="fade">
+<div class="head">
+<p class="eyebrow">QA-3 ถึง QA-5</p>
+<h2>ให้ Codex รันเทสให้ ไม่ต้องจำคำสั่ง</h2>
+</div>
+<table>
+<tr class="th"><th style="width:32%">อยากทำ</th><th style="width:68%">พิมพ์บอก Codex</th></tr>
+<tr><td>รันเทสทั้งหมด</td><td>รันเทสทั้งหมด แล้วสรุปเป็นตาราง ว่าข้อไหนผ่าน ข้อไหนไม่ผ่าน เพราะอะไร</td></tr>
+<tr><td>รันข้อเดียว</td><td>รันเฉพาะเทส TC-07</td></tr>
+<tr><td>หาเทสที่ผ่านบ้างไม่ผ่านบ้าง</td><td>รัน TC-05 ซ้ำ 5 รอบ แล้วบอกว่าไม่ผ่านรอบไหน เพราะอะไร</td></tr>
+<tr><td>ดูว่าไม่ผ่านเพราะอะไร</td><td>ดู error ของเทสที่ไม่ผ่าน แล้วบอกว่าเป็นที่ระบบ หรือเทสเขียนผิด</td></tr>
+<tr><td>เช็กว่าเทสตรวจจริง</td><td>บอกหน่อยว่าแต่ละเทส จับ bug แบบไหนได้ ยังไม่ต้องแก้ไฟล์</td></tr>
+</table>
+</section>
+<section id="ws-qa3" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ QA-3</p>
+<h2>เขียนเทสหน้าเว็บอัตโนมัติชุดแรก</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>ใน File Explorer สร้างโฟลเดอร์ qa-tests ใน codex-practice แล้วคัดลอก testcases.csv กับ requirements\requirements.md จาก practice-kit\qa มาวาง</li>
+<li>กด Ctrl+O เลือกโฟลเดอร์ qa-tests ส่งข้อความทางขวา ถ้า Codex ขอใช้อินเทอร์เน็ต ให้กดอนุญาต</li>
+<li>ให้ Codex สร้าง AGENTS.md แบบโฟลเดอร์เทส (คู่มือหัวข้อ 5) แล้วสั่งเขียนเทสจาก testcases.csv (คู่มือ QA-3)</li>
+<li>สั่ง: รันเทสทั้งหมด 3 รอบ แล้วแยกว่าข้อไหนไม่ผ่านเพราะระบบผิด</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>ตั้งโปรเจกต์ Playwright ในโฟลเดอร์นี้ ด้วย npm init playwright@latest -- --quiet --browser=chromium --lang=ts แล้วเปิดใช้ git และ commit ทุกไฟล์<br>ตั้งให้เทสไปที่ http://127.0.0.1:3100 ใช้ chromium อย่างเดียว รันทีละเทส (workers 1) แล้วลบไฟล์ตัวอย่าง example.spec.ts<br>บัญชีทดสอบให้อ่านจาก TEST_USER กับ TEST_PASSWORD ถ้าไม่มี ใช้ requester1 / demo1234 (บัญชีสมมติ)</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> เทสที่ผ่าน ผ่านครบทั้ง 3 รอบ และเทสที่ไม่ผ่าน บอกได้ว่าไม่ตรงข้อกำหนดข้อไหน โดยไม่ได้แก้เทสให้ผ่าน</p></div>
+</section>
+<section id="ws-qa4" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ QA-4</p>
+<h2>เทส API: ระบบตอบถูกทุกกรณีไหม</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>เปิดระบบตัวอย่างด้วย start.bat ถ้ายังไม่ได้เปิด</li>
+<li>ในโฟลเดอร์ qa-tests ส่งข้อความทางขวาให้ Codex</li>
+<li>สั่ง: รันเทส tests/api.spec.ts แล้วสรุปผล</li>
+<li>ให้สรุปเป็นตาราง: ควรได้รหัสอะไร / ได้จริงเท่าไร / ข้อกำหนดข้อไหน</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>อ่านสเปกที่ http://127.0.0.1:3100/openapi.json แล้วเขียน API test ไว้ใน tests/api.spec.ts<br>ให้ครอบ 4 แบบ: ไม่ล็อกอินต้องได้ 401 (REQ-02), ข้อมูลผิดต้องได้ 400 (REQ-05 ถึง 07), คนไม่มีสิทธิ์ต้องได้ 403 (REQ-15), เปลี่ยนสถานะซ้ำต้องได้ 409 (REQ-16)<br>ก่อนแต่ละเทส เรียก POST /api/reset ให้ข้อมูลกลับเป็นค่าเริ่มต้น<br>บัญชีผู้อนุมัติอ่านจาก APPROVER_USER กับ APPROVER_PASSWORD ถ้าไม่มี ใช้ approver1 / demo1234</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> มีเทสครบ 4 แบบ และเจอ bug ที่กดจากหน้าเว็บมองไม่เห็นอย่างน้อย 1 จุด</p></div>
+</section>
+<!-- ==== สายหน่วยงาน: จากงานที่ทำซ้ำจนได้เครื่องมือที่เพื่อนใช้ได้ ==== -->
+<section id="biz-flow" data-transition="fade">
+<div class="head">
+<p class="eyebrow">สายหน่วยงาน ทีละขั้น</p>
+<h2>จากงานที่ทำซ้ำทุกสัปดาห์ จนได้เครื่องมือที่เพื่อนใช้ได้</h2>
+</div>
+<div class="flow">
+<div class="step"><p class="n">BIZ-1</p><h3>เลือกงาน</h3><p class="text">เขียนสั้น ๆ ว่า เอาอะไรเข้า ได้อะไรออก</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="1"></x-shape>
+<div class="step fragment" data-fragment-index="1"><p class="n">BIZ-2</p><h3>ดูข้อมูลก่อน</h3><p class="text">ให้ Codex หา จุดที่ข้อมูล ผิดปกติ</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="2"></x-shape>
+<div class="step fragment" data-fragment-index="2"><p class="n">BIZ-2/3</p><h3>ทำเครื่องมือ</h3><p class="text">โปรแกรมจัดการ Excel หรือ หน้าเว็บ ไฟล์เดียว</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="3"></x-shape>
+<div class="step key fragment" data-fragment-index="3"><p class="n">BIZ-4</p><h3>ตรวจตัวเลข</h3><p class="text">ยอดต้องตรง กับที่คิดเอง ใน Excel</p></div>
+<x-shape kind="arrow-right" class="arrow fragment" data-fragment-index="4"></x-shape>
+<div class="step fragment" data-fragment-index="4"><p class="n">BIZ-4</p><h3>เขียนวิธีใช้</h3><p class="text">เพื่อนใช้ได้เอง ไม่ต้องมาถาม</p></div>
+</div>
+<p class="lead">ฝึกกับรายงานรับวัสดุ 3 ไซต์ในไฟล์ฝึก ข้อมูลมีจุดผิดซ่อนอยู่ 7 แบบ ผู้สอนมียอดที่ถูกต้อง</p>
+</section>
+<section id="ws-biz1" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ BIZ-1</p>
+<h2>เลือกงานจริงของคุณ แล้วเขียนสั้น ๆ 1 หน้า</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>เลือกงานที่ทำทุกสัปดาห์ มีวิธีทำชัด และเช็กได้ด้วยตัวเลข</li>
+<li>สร้างโฟลเดอร์ใหม่ กด Ctrl+O เลือกโฟลเดอร์นั้น เขียนตามแบบทางขวา เซฟเป็น brief.md (ให้ Codex สร้างไฟล์ให้ก็ได้)</li>
+<li>บอก Codex: อ่าน brief.md แล้วถามสิ่งที่ยังไม่ชัด ไม่เกิน 5 ข้อ ยังไม่ต้องทำโปรแกรม</li>
+<li>แลกกับเพื่อนข้าง ๆ อ่านของกันและกัน</li>
+</ol>
+<p class="code"># งานที่อยากให้ช่วย: &lt;ตั้งชื่อ&gt;<br>- ตอนนี้ทำยังไง: &lt;ใช้เวลากี่นาที ทำบ่อยแค่ไหน&gt;<br>- ข้อมูลที่ใช้: &lt;ไฟล์อะไร มีคอลัมน์อะไร&gt;<br>- อยากได้อะไรออกมา: &lt;ไฟล์อะไร ใครเปิดดู&gt;<br>- วิธีคิด: &lt;สูตร การปัดเศษ&gt;<br>- ระดับความลับ: &lt;เปิดเผยได้ / ภายใน / ลับ / ข้อมูลส่วนบุคคล&gt;<br>- ดูยังไงว่าถูก: &lt;ตัวเลขที่รู้คำตอบอยู่แล้ว&gt;<br>- รอบนี้ยังไม่ทำ: &lt;สิ่งที่ตัดออกไปก่อน&gt;</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> เพื่อนอ่านแล้วเล่ากลับได้ว่า เครื่องมือนี้เอาอะไรเข้า ได้อะไรออก และรู้ได้ยังไงว่าถูก</p></div>
+</section>
+<section id="ws-biz2" class="ws" data-transition="fade">
+<div class="head">
+<p class="ws-tag">ลองทำ BIZ-2</p>
+<h2>รวมรายงานรับวัสดุจาก 3 ไซต์</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>กด Ctrl+O เลือกโฟลเดอร์ practice-kit\biz แล้วสั่ง commit จุดแรกไว้</li>
+<li>ขั้นแรก ให้ Codex ดูก่อนว่าข้อมูลผิดตรงไหน (ข้อความทางขวา)</li>
+<li>ขั้นต่อไป ให้ทำโปรแกรมรวมไฟล์ กับไฟล์ดับเบิลคลิก run.bat (ข้อความอยู่ในคู่มือ BIZ-2)</li>
+<li>เลือก 1 ไซต์ 1 วัสดุ คิดเองใน Excel แล้วเทียบกับที่โปรแกรมสรุป</li>
+</ol>
+<p class="code"><span class="label">พิมพ์ให้ Codex</span><br>ช่วยดูทุกไฟล์ใน reports/ กับ price-list.csv ยังไม่ต้องทำโปรแกรม และห้ามแก้ไฟล์<br>บอกเป็นตารางว่าข้อมูลมีปัญหาอะไรบ้าง: ปัญหา | ไฟล์ | กี่แถว | ตัวอย่าง<br>ดูอย่างน้อย: แถวว่าง แถวซ้ำ วันที่เขียนหลายแบบ (พ.ศ./ค.ศ.) ชื่อไซต์สะกดไม่เหมือนกัน ตัวเลขที่ใส่เป็นข้อความหรือมีคอมมา หน่วยไม่ตรงกับ price-list.csv</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> เจอปัญหาครบทุกแบบ และยอดรวมตรงกับที่ผู้สอนเฉลย</p></div>
+</section>
+<section id="biz-check" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ก่อนให้คนอื่นใช้</p>
+<h2>เช็ก 4 ข้อนี้ก่อน</h2>
+</div>
+<div class="cards2">
+<div class="checks">
+<div class="check" style="--i:0"><x-icon name="CheckCircle"></x-icon><p class="text">ยอดรวมตรงกับที่คิดเองใน Excel</p></div>
+<div class="check" style="--i:1"><x-icon name="CheckCircle"></x-icon><p class="text">แถวที่ถูกตัดทิ้ง มีเหตุผลบอกไว้ทุกแถว</p></div>
+<div class="check" style="--i:2"><x-icon name="CheckCircle"></x-icon><p class="text">รัน 2 ครั้งได้เหมือนเดิม และไฟล์ต้นฉบับไม่ถูกแก้</p></div>
+<div class="check" style="--i:3"><x-icon name="CheckCircle"></x-icon><p class="text">ไม่มีรหัสผ่านหรือข้อมูลจริงในไฟล์ที่แชร์</p></div>
+</div>
+<div class="head">
+<p class="tag">ไฟล์ดับเบิลคลิก (run.bat) ที่ให้ Codex ทำให้</p>
+<p class="code">@echo off<br>cd /d "%~dp0"<br>python merge_reports.py<br>pause</p>
+</div>
+</div>
+</section>
+<section id="ws-biz3" class="ws" data-transition="push">
+<div class="head">
+<p class="ws-tag">ลองทำ BIZ-3</p>
+<h2>หน้าเว็บคิดราคาวัสดุ</h2>
+</div>
+<div class="ws-grid">
+<ol class="ws-steps">
+<li>บอก Codex ทำไฟล์ estimate.html (ข้อความอยู่ในคู่มือ BIZ-3)</li>
+<li>Codex จะรัน server ในเครื่อง แล้วใช้ @Browser เปิดหน้าเว็บ กด Allow once ทุกครั้งที่ถาม (ปกติ 2 ครั้ง)</li>
+<li>เปิด 127.0.0.1:8000/estimate.html ใน Edge เอง เทียบตัวเลขกับทางขวา กดดาวน์โหลด CSV แล้วเปิดใน Excel</li>
+<li>เพิ่มทีละอย่าง เช่น ช่องชื่อไซต์ แล้วลองใหม่ด้วย @Browser</li>
+</ol>
+<p class="code"><span class="label" data-copy="off">ตัวเลขที่ต้องได้</span><br>MAT-001: 142.50 x 10 = 1,425.00<br>MAT-003: 420.00 x 2 = 840.00<br>มูลค่าสินค้า: 2,265.00<br>VAT 7%: 158.55<br>รวมทั้งสิ้น: 2,423.55</p>
+</div>
+<div class="done"><x-icon name="CheckCircle"></x-icon><p class="text"><b>ทำได้แล้ว ถ้า</b> หน้าเว็บขึ้น 2,265.00 / 158.55 / 2,423.55 ตรงทุกตัว และดาวน์โหลดไฟล์ไปเปิดใน Excel แล้วภาษาไทยไม่เพี้ยน</p></div>
+</section>
+<section id="shotb-1" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">BIZ-3 · ภาพ 1/3</p>
+<h2>บรรทัดสุดท้าย: รัน server แล้วใช้ @Browser</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotb-1.png" alt="คำสั่ง BIZ-3 บรรทัดสุดท้ายให้รัน server ที่ http://127.0.0.1:8000 แล้วใช้ Browser เปิด estimate.html" style="width:1428px;height:460px"></div>
+<p class="shot-note">@Browser เปิดไฟล์ในเครื่องตรง ๆ ไม่ได้ จึงต้องให้ Codex <b>รัน server ในเครื่อง</b>ก่อน ตอนพิมพ์ @Browser ให้เลือกบรรทัด Browser</p>
+</div>
+</section>
+<section id="shotb-2" class="ws shot" data-transition="fade">
+<div class="head">
+<p class="ws-tag">BIZ-3 · ภาพ 2/3</p>
+<h2>กด Allow once 2 ครั้ง</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotb-2.png" alt="ครั้งแรกขอเปิด server ที่ 127.0.0.1:8000 ครั้งที่สองขอให้ Browser เข้า http://127.0.0.1:8000" style="width:1173px;height:500px"></div>
+<p class="shot-note">ครั้งแรกขอเปิด server ในเครื่อง ครั้งที่สองขอให้ Browser เข้าหน้าเว็บ กด <b>Allow once</b> ทั้งคู่ ไม่ต้องกด Allow for all sites</p>
+</div>
+</section>
+<section id="shotb-3" class="ws shot side" data-transition="fade">
+<div class="head">
+<p class="ws-tag">BIZ-3 · ภาพ 3/3</p>
+<h2>เทียบตัวเลขบนหน้าเว็บกับเฉลย</h2>
+</div>
+<div class="shot-body">
+<div class="shot-frame"><img src="img/shotb-3.png" alt="หน้าเว็บประเมินราคาวัสดุ MAT-001 10 ถุง MAT-003 2 ลบ.ม. รวมทั้งสิ้น 2,423.55 บาท" style="width:690px;height:600px"></div>
+<p class="shot-note">รวมทั้งสิ้นต้องได้ <b>2,423.55 บาท</b> ถ้าไม่ตรง ให้บอก Codex ว่าแถวไหนผิด แล้วสั่งแก้ทีละอย่าง</p>
+</div>
+</section>
+<!-- ==== ติดตรงไหน แก้ยังไง ==== -->
+<section id="trouble" data-transition="fade">
+<div class="head">
+<p class="eyebrow">ติดตรงไหน</p>
+<h2>ปัญหาที่เจอบ่อย</h2>
+</div>
+<table>
+<tr class="th"><th style="width:44%">อาการ</th><th style="width:56%">ทำแบบนี้</th></tr>
+<tr><td>Codex บอกว่าเสร็จ แต่ไฟล์ไม่เปลี่ยน</td><td>สั่ง Codex: ใช้ git เช็กว่าไฟล์ไหนเปลี่ยน แสดงผลจริงให้ดู</td></tr>
+<tr><td>Codex แก้ไฟล์เกินที่สั่ง</td><td>สั่งย้อนกลับจุดล่าสุด แล้วสั่งใหม่ บอกว่า แก้แค่ไฟล์นี้</td></tr>
+<tr><td>สั่งแก้แล้วก็ยังผิดอยู่</td><td>หยุดก่อน เริ่มแชตใหม่ด้วย /new แล้ววาง error ทั้งหมดให้ดู</td></tr>
+<tr><td>เปิดใน Excel แล้วภาษาไทยเพี้ยน</td><td>บอก Codex: บันทึกใหม่ให้ Excel เปิดภาษาไทยได้</td></tr>
+<tr><td>ขึ้นว่า running scripts is disabled</td><td>บอก Codex: ใช้ npm.cmd กับ npx.cmd แทน</td></tr>
+<tr><td>Codex บอกว่าไม่เจอ git, node หรือ python</td><td>ปิดแอปแล้วเปิดใหม่ ยังไม่ได้ให้รีสตาร์ตเครื่อง</td></tr>
+</table>
+</section>
+</main>
+<nav class="bar" aria-label="เลื่อนสไลด์">
+<button type="button" data-go="prev" aria-label="สไลด์ก่อนหน้า">&lsaquo;</button>
+<span class="pos" aria-live="polite">1 / 53</span>
+<button type="button" data-go="next" aria-label="สไลด์ถัดไป">&rsaquo;</button>
+<button type="button" data-go="full">เต็มจอ</button>
+<a href="prompts.html" target="_blank" rel="noopener">ข้อความลองทำ</a>
+</nav>
+<p class="hint">หมุนจอเป็นแนวนอนเพื่อดูสไลด์ชัดขึ้น หรือเปิด <a href="prompts.html">ข้อความลองทำ</a> เพื่อคัดลอกไปวางใน Codex</p>
+<script src="deck.js" defer></script>
+</body>
+</html>
