@@ -535,6 +535,8 @@ body.idle .bar { opacity: 0; }
     font: 400 16px/1.6 'Noto Sans Thai', Tahoma, sans-serif;
   }
   .hint a { color: #8DB2FF; }
+  /* six bar items do not fit a portrait phone; the hint above carries the same two links */
+  .bar a { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

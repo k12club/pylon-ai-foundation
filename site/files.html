@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ดาวน์โหลดชุดฝึก Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: same column and tokens as prompts.html; one card per file (download button, how to extract, what is inside) */
+:root {
+  --bg: #F3F5F8;
+  --surface: #FFFFFF;
+  --ink: #17202B;
+  --muted: #4F5B6B;
+  --line: #D5DBE3;
+  --accent: #2347B5;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #E5EBFA;
+  --warn: #93400D;
+  --warn-soft: #FAEDE2;
+  --code-bg: #ECEFF4;
+  --font-body: "IBM Plex Sans Thai", "Leelawadee UI", Tahoma, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+    --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+    --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F141A; --surface: #17202A; --ink: #E4E9F0; --muted: #A2ADBB; --line: #2B3644;
+  --accent: #8FA8FF; --accent-ink: #0F141A; --accent-soft: #1D2948;
+  --warn: #F2A570; --warn-soft: #3A2415; --code-bg: #0B1015;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.wrap {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 4rem;
+  display: grid;
+  gap: 2rem;
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; line-height: 1.35; }
+h1 { font-size: 2rem; font-weight: 700; }
+h2 { font-size: 1.25rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+code { font-family: var(--font-body); background: var(--code-bg); border-radius: 5px; padding: 0.05rem 0.35rem; white-space: nowrap; }
+
+.top { display: grid; gap: 1rem; }
+.eyebrow { color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+.lede { color: var(--muted); }
+
+.file { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.25rem; display: grid; gap: 1.1rem; min-width: 0; }
+.file-head { display: grid; gap: 0.35rem; }
+.meta { color: var(--muted); font-size: 0.95rem; }
+.dl {
+  justify-self: start;
+  display: inline-block;
+  background: var(--accent); color: var(--accent-ink);
+  font-weight: 600; text-decoration: none;
+  padding: 0.7rem 1.25rem; border-radius: 10px;
+}
+.dl:hover { filter: brightness(1.1); }
+.block { display: grid; gap: 0.5rem; }
+ol, ul { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.35rem; }
+.inside { list-style: none; padding: 0; gap: 0; border-top: 1px solid var(--line); }
+.inside li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.inside li > span:first-child { font-weight: 600; overflow-wrap: anywhere; }
+.note { background: var(--warn-soft); border-radius: 12px; padding: 1rem 1.15rem; }
+.note b { color: var(--warn); }
+
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.65rem; }
+  .file { padding: 1rem; }
+  .dl { justify-self: stretch; text-align: center; }
+  .inside li { grid-template-columns: 1fr; gap: 0.1rem; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <p class="eyebrow">คอร์ส Codex · <a href="index.html">ดูสไลด์</a> · <a href="prompts.html">ข้อความลองทำ</a></p>
+    <h1>ดาวน์โหลดชุดฝึก</h1>
+    <p class="lede">ไฟล์ฝึกที่ใช้ตั้งแต่ลองทำ 0 จนจบคอร์ส โหลดครั้งเดียว แตกไว้ในโฟลเดอร์ codex-practice แล้วใช้ได้ทุกครั้งที่เรียน</p>
+  </header>
+
+  <section class="file" aria-labelledby="kit-h">
+    <div class="file-head">
+      <h2 id="kit-h">practice-kit.zip</h2>
+      <p class="meta">ชุดเดียวใช้ได้ทั้งสาย QA และสายหน่วยงาน ข้อมูลข้างในเป็นข้อมูลสมมติทั้งหมด</p>
+    </div>
+    <a class="dl" href="practice-kit.zip" download>ดาวน์โหลด practice-kit.zip</a>
+
+    <div class="block">
+      <h3>แตกไฟล์ (ไม่ต้องพิมพ์คำสั่ง)</h3>
+      <ol>
+        <li>เปิด File Explorer พิมพ์ <code>%USERPROFILE%</code> ในช่องที่อยู่ด้านบน กด Enter แล้วสร้างโฟลเดอร์ใหม่ชื่อ <code>codex-practice</code> ถ้ายังไม่มี</li>
+        <li>เปิดโฟลเดอร์ Downloads คลิกขวาที่ <code>practice-kit.zip</code> เลือก Extract All</li>
+        <li>กด Browse เลือกโฟลเดอร์ <code>codex-practice</code> แล้วกด Extract จะได้โฟลเดอร์ <code>codex-practice\practice-kit</code></li>
+      </ol>
+    </div>
+
+    <div class="block">
+      <h3>ข้างในมีอะไร</h3>
+      <ul class="inside">
+        <li><span>prompts.html</span><span>ข้อความลองทำทุกข้อ ดับเบิลคลิกเปิด แล้วกดคัดลอกไปวางใน Codex</span></li>
+        <li><span>common</span><span>พื้นฐานที่ทุกคนเรียน: สรุปประชุม รวมไฟล์ยอดขาย และ skill ของทีม</span></li>
+        <li><span>qa</span><span>ข้อกำหนดและระบบเบิกวัสดุตัวอย่าง สำหรับ QA-1 ถึง QA-5</span></li>
+        <li><span>biz</span><span>รายงานรับวัสดุ 3 ไซต์ ราคาวัสดุ และแบบหนังสือ สำหรับ BIZ-2 ถึง BIZ-4</span></li>
+        <li><span>README.md</span><span>วิธีแตกไฟล์ และแต่ละโฟลเดอร์ใช้ฝึกเรื่องไหน</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="note"><b>โหลดใหม่ได้ทุกเมื่อ</b> ถ้าไฟล์ฝึกหายหรือพัง ให้โหลดแล้วแตกใหม่ ถ้าแตกทับโฟลเดอร์เดิม Windows จะถามก่อนแทนที่ไฟล์ และที่แก้ไว้ในไฟล์เดิมจะหายไป</p>
+
+  <footer>
+    <p>ชื่อบริษัท โครงการ และผู้ขายในชุดฝึกไม่มีอยู่จริง บัญชีในระบบตัวอย่างใช้ได้กับระบบฝึกในเครื่องเท่านั้น ถ้าโหลดไม่ได้ ให้ถามผู้สอน</p>
+  </footer>
+</main>
+</body>
+</html>

@@ -1,7 +1,9 @@
 """Trainer-only generator for practice-kit data (stdlib only, Python 3.9+).
 
 Run:   python3 trainer-kit/build_kit.py          -> writes data files, data-key.json, normalises text files, builds practice-kit.zip
+                                                   and copies it to site/practice-kit.zip (downloaded from codex.jeerawut.com/files)
 Check: python3 trainer-kit/build_kit.py --check  -> no writes; verifies shipped files against a fresh regeneration
+                                                   and that site/practice-kit.zip is identical to practice-kit.zip
 """
 import csv
 import io
@@ -18,6 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 KIT = os.path.join(ROOT, "practice-kit")
 ZIP_PATH = os.path.join(ROOT, "practice-kit.zip")
+SITE_ZIP = os.path.join(ROOT, "site", "practice-kit.zip")  # byte copy of ZIP_PATH served by the course site
 KEY_PATH = os.path.join(HERE, "data-key.json")
 FALLBACK_PATH = os.path.join(HERE, "site-c-fallback.csv")
 SEED = 20270113
@@ -462,6 +465,11 @@ def check():
     expected_names = {"practice-kit/" + os.path.relpath(p, KIT).replace(os.sep, "/") for p in kit_files()}
     if set(names) != expected_names:
         problems.append("zip listing differs from practice-kit/ (rebuild the zip)")
+    # z.write stores file mtimes, so the zip changes on every build: compare the site copy with the root zip, not with a rebuild
+    if not os.path.isfile(SITE_ZIP):
+        problems.append("site/practice-kit.zip is missing (run build_kit.py)")
+    elif open(SITE_ZIP, "rb").read() != open(ZIP_PATH, "rb").read():
+        problems.append("site/practice-kit.zip differs from practice-kit.zip (run build_kit.py)")
     if problems:
         print("\n".join(problems))
         sys.exit(1)
@@ -478,7 +486,8 @@ def main():
         open(path, "wb").write(data)
     normalise()
     build_zip()
-    print("built: %d clean rows, grand total %s baht, zip %s" % (sum(key["clean_rows"].values()), key["grand_total"]["baht"], os.path.relpath(ZIP_PATH, ROOT)))
+    open(SITE_ZIP, "wb").write(open(ZIP_PATH, "rb").read())
+    print("built: %d clean rows, grand total %s baht, zip %s (copied to %s)" % (sum(key["clean_rows"].values()), key["grand_total"]["baht"], os.path.relpath(ZIP_PATH, ROOT), os.path.relpath(SITE_ZIP, ROOT)))
 
 
 if __name__ == "__main__":

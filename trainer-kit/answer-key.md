@@ -6,8 +6,8 @@
 
 | คำสั่ง | ทำอะไร |
 |---|---|
-| `python3 trainer-kit/build_kit.py` | สร้างไฟล์ข้อมูลใหม่, `data-key.json`, ใส่ BOM/CRLF ให้ไฟล์ข้อความ, สร้าง `practice-kit.zip` |
-| `python3 trainer-kit/build_kit.py --check` | ตรวจว่าไฟล์ที่จะแจกตรงกับเฉลย ไม่เขียนไฟล์ |
+| `python3 trainer-kit/build_kit.py` | สร้างไฟล์ข้อมูลใหม่, `data-key.json`, ใส่ BOM/CRLF ให้ไฟล์ข้อความ, สร้าง `practice-kit.zip` และคัดลอกไปที่ `site/practice-kit.zip` (ให้โหลดจาก codex.jeerawut.com/files) |
+| `python3 trainer-kit/build_kit.py --check` | ตรวจว่าไฟล์ที่จะแจกตรงกับเฉลย และ `site/practice-kit.zip` ตรงกับ `practice-kit.zip` ไม่เขียนไฟล์ |
 | `node trainer-kit/selfcheck.js` | เปิดระบบตัวอย่างบนพอร์ตว่าง ตรวจ bug 10 จุดว่ายังเกิดจริง ตรวจการทำงานปกติ 17 ข้อ สแกนคำที่ใบ้คำตอบ และเรียก `--check` (ต้องได้ `all 29 checks passed`) |
 
 แก้ไฟล์ใน `practice-kit/` เมื่อไร ให้รัน `build_kit.py` แล้ว `selfcheck.js` ใหม่ทุกครั้งก่อนแจก

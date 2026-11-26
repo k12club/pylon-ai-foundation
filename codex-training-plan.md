@@ -4,7 +4,7 @@
 - คู่มือเทคนิค (Claude Doc): https://claude.ai/artifact/PX6qKPhs8t5pogKnkE613t
 - สไลด์สอน 53 หน้า (รวมโปรแกรมที่ต้องลงและวิธีเช็ก): https://codex.jeerawut.com
 - ข้อความลองทำทุกข้อ มีปุ่มคัดลอก: https://codex.jeerawut.com/prompts
-- ชุดฝึกแจกผู้เรียน: `practice-kit.zip` / เฉลยและสคริปต์ตรวจของผู้สอน: `trainer-kit/`
+- ชุดฝึกแจกผู้เรียน: `practice-kit.zip` (โหลดได้ที่ https://codex.jeerawut.com/files) / เฉลยและสคริปต์ตรวจของผู้สอน: `trainer-kit/`
 
 อัปเดต: 21 พ.ย. 2026
 ผู้เรียน 2 กลุ่ม: (A) QA ใช้ Codex ช่วยทดสอบระบบ (B) หน่วยงานอื่นใช้ Codex ทำเครื่องมือช่วยงานของตัวเอง

@@ -1,5 +1,5 @@
 {
-  // สไลด์สอน Codex (/) และหน้าข้อความลองทำ (/prompts): เป็น static assets ล้วน ไม่มีโค้ด Worker (ไม่มี "main")
+  // สไลด์สอน Codex (/), หน้าข้อความลองทำ (/prompts) และหน้าโหลดชุดฝึก (/files): เป็น static assets ล้วน ไม่มีโค้ด Worker (ไม่มี "main")
   //   npx --yes wrangler@4.166.0 dev --port 8788   ดูในเครื่องแบบเดียวกับบนเว็บจริง (/prompts -> prompts.html)
   //   ./deploy.sh                                   เช็กว่าไม่มีโน้ตผู้สอนหลุด แล้ว deploy
   // ล็อกเวอร์ชัน wrangler ไว้ในคำสั่ง เพราะ repo นี้ไม่มี package.json
