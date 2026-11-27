@@ -14,7 +14,7 @@
 | `codex-training-plan.md` | แผนคอร์ส: สมมติฐาน, สิ่งที่ต้องเตรียม, โปรแกรมที่ต้องลง, เนื้อหาแต่ละครั้ง, เกณฑ์ผ่าน |
 | `install-checklist.local.html` | หน้ารายการติดตั้งโปรแกรมก่อนเรียน เปิดในเบราว์เซอร์ได้เลย |
 | `install-checklist.html` | หน้าเดียวกัน แต่เป็นฉบับที่ใช้ publish เป็น Artifact (ไม่มีส่วน `<head>`) |
-| `site/` | สไลด์ฉบับเว็บ (`index.html` 53 หน้า, `deck.css`, `deck.js`, `img/`), หน้า `prompts.html` ที่คัดลอกข้อความลองทำทุกข้อได้ และหน้า `files.html` ที่ให้โหลด `practice-kit.zip` (สำเนาที่ `build_kit.py` คัดลอกมาให้ ห้ามแก้เอง) ทั้งสามหน้าลิงก์ `watermark.css` + `watermark.js` (ลายน้ำ Jeerawut Buayoy ที่ซ่อนไว้ ขึ้นเมื่อกด Cmd+Shift / Win หรือหน้าต่างเสียโฟกัส และขึ้นเสมอตอนพิมพ์ แต่ไม่ติดภาพที่แคปด้วยมือถือ ถ่ายรูปจอ หรือกด PrtSc บน Windows ซึ่งจับภาพก่อนที่หน้าเว็บจะรู้) ซึ่ง `build_kit.py` ฝังลงใน `practice-kit/prompts.html` ให้เอง |
+| `site/` | สไลด์ฉบับเว็บ (`index.html` 53 หน้า, `deck.css`, `deck.js`, `img/`), หน้า `prompts.html` ที่คัดลอกข้อความลองทำทุกข้อได้ และหน้า `files.html` ที่ให้โหลด `practice-kit.zip` (สำเนาที่ `build_kit.py` คัดลอกมาให้ ห้ามแก้เอง) |
 | `wrangler.jsonc`, `deploy.sh` | ตั้งค่าและสคริปต์ deploy `site/` ขึ้น Cloudflare Worker ที่ codex.jeerawut.com |
 | `practice-kit/` | ไฟล์ฝึกที่แจกผู้เรียน ข้อมูลทั้งหมดเป็นข้อมูลสมมติ |
 | `practice-kit.zip` | `practice-kit/` ที่บีบอัดแล้ว ไฟล์นี้คือไฟล์ที่ส่งให้ผู้เรียน (โหลดได้จาก https://codex.jeerawut.com/files) |
