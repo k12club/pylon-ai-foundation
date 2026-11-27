@@ -290,6 +290,17 @@ def outputs():
         files[os.path.join(KIT, "common", "session2", fname)] = csv_bytes(["date", "branch", "product_group", "qty", "amount_baht"], rows)
     # copy-to-Codex page: the source is site/prompts.html (same page as codex.jeerawut.com/prompts), shipped CRLF + BOM like other kit text
     page = open(os.path.join(ROOT, "site", "prompts.html"), encoding="utf-8-sig").read()
+    # the kit copy is opened offline with no watermark.css/.js beside it, so both are inlined in place of their tags
+    for tag, fname, wrap in (('<link rel="stylesheet" href="watermark.css">', "watermark.css", "style"),
+                             ('<script src="watermark.js"></script>', "watermark.js", "script")):
+        if page.count(tag) != 1:
+            sys.exit("site/prompts.html: expected exactly one %s" % tag)
+        body = open(os.path.join(ROOT, "site", fname), encoding="utf-8-sig").read().strip()
+        # these would end the inlined block early (or open a comment) and break the kit page
+        for bad in ("</script", "</style", "<!--"):
+            if bad in body.lower():
+                sys.exit("site/%s contains %s, which cannot be inlined into the kit page" % (fname, bad))
+        page = page.replace(tag, "<%s>\n%s\n</%s>" % (wrap, body, wrap))
     files[os.path.join(KIT, "prompts.html")] = ("﻿" + page.replace("\r\n", "\n").replace("\n", "\r\n")).encode("utf-8")
     key = build_key(all_rows)
     files[KEY_PATH] =(json.dumps(key, ensure_ascii=False, indent=2) + "\n").encode("utf-8")

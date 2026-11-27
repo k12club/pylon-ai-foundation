@@ -1,0 +1,33 @@
+/* ลายน้ำชื่อเจ้าของ: ข้อความเอียงซ้ำทั้งจอ ใช้ร่วมกันทั้ง index.html, prompts.html, files.html (คู่กับ watermark.js)
+   - ปกติซ่อนไว้ ขึ้นเมื่อ watermark.js ใส่ class wm-on ที่ <html> (ตอนกดคีย์แคปจอ หรือหน้าต่างเสียโฟกัส) และขึ้นเสมอตอนสั่งพิมพ์/บันทึก PDF
+   - เบราว์เซอร์ตรวจจับการแคปจอจริงไม่ได้: แคปด้วยมือถือ ถ่ายรูปจอ แชร์จอ หรือโปรแกรมแคปที่ไม่ผ่านคีย์บอร์ดของหน้านี้ จะไม่มีลายน้ำ
+   - ขึ้นทันที (ไม่มี transition ตอนขึ้น เพื่อให้วาดเสร็จก่อนเครื่องจับภาพ) แต่ค่อยๆ จางหายตอนซ่อน
+   - position: fixed ทับ viewport เสมอ (เลื่อนหน้าแล้วก็ยังอยู่ และซ้ำทุกหน้าตอนสั่งพิมพ์)
+   - pointer-events: none คลิก เลือกข้อความ และปุ่มคัดลอกยังใช้ได้ตามปกติ
+   - z-index 9: อยู่เหนือสไลด์ (2) แต่ใต้แถบปุ่มของสไลด์ (.bar = 10)
+   - สีเทากลางแบบโปร่งแสง มองเห็นได้ทั้งพื้นสว่างและพื้นมืด จึงไม่ต้องแยกตาม prefers-color-scheme
+   - ข้อความอยู่ใน SVG data URI (เข้ารหัส %3C %3E %23 แบบเดียวกับไอคอนใน deck.css) ใช้ฟอนต์ของเครื่อง ไม่ต้องโหลดฟอนต์เพิ่ม */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='260'%3E%3Ctext x='210' y='130' text-anchor='middle' dominant-baseline='middle' transform='rotate(-24 210 130)' font-family='Arial, Helvetica, sans-serif' font-size='22' font-weight='600' letter-spacing='1' fill='%23808894' fill-opacity='0.22'%3EJeerawut Buayoy%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+  will-change: opacity;
+}
+html.wm-on body::after {
+  opacity: 1;
+  transition: none;
+}
+@media print {
+  body::after {
+    opacity: 1;
+    transition: none;
+  }
+}
